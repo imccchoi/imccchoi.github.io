@@ -4,11 +4,24 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/2023/02/15/hello-world/"/>
-    <url>/2023/02/15/hello-world/</url>
+    <title>基于Hexo + GitHub Pages的博客建站教程</title>
+    <link href="/2023/01/25/Hexo%E6%95%99%E7%A8%8B/"/>
+    <url>/2023/01/25/Hexo%E6%95%99%E7%A8%8B/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的方法。</p><h3 id="建站原理"><a href="#建站原理" class="headerlink" title="建站原理"></a>建站原理</h3><p>通常来说，建立个人博客一般包含四个部分：</p><ol><li><p>博客生成框架（可以理解为将用户的输入快速生成HTML、CSS、Javascript等前端界面，对博客进行快速且简便的设置）- <code>Hexo</code></p></li><li><p>文件托管平台（文件托管平台，为用户提供访问和修改的接口，好比如将博客的所需的文件存放在云端）- <code>GitHub</code> <code>Gitee</code></p></li><li><p>站点部署服务（将成形的博客网站目录部署到互联网上，以便访问浏览）- <code>GitHub Pages</code> <code>Netify</code></p></li><li><p>访问加速服务（CDN加速，通过多结点的缓存来提高网络内容的解析和访问速度）- <code>Cloudfare</code></p></li></ol><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="1-GitHub账号注册与创建仓库"><a href="#1-GitHub账号注册与创建仓库" class="headerlink" title="1.GitHub账号注册与创建仓库"></a>1.GitHub账号注册与创建仓库</h4><p>首先必须拥有一个GitHub账号，注册就不作详细说明。</p><p>注册好账号进入<code>Repositories</code>选择<code>New</code>新建一个仓库。</p><p>在<code>Repository name</code>这里填写<code>你的用户名.github.io</code>，一定要按照此格式填写，填写好就可以创建了。</p><h4 id="2-Git的安装与配置"><a href="#2-Git的安装与配置" class="headerlink" title="2.Git的安装与配置"></a>2.Git的安装与配置</h4><p>3.NodeJS的安装与配置</p><p>3.安装Hexo框架</p><p>任意路径打开Git Bash</p><img src="/2023/01/25/Hexo%E6%95%99%E7%A8%8B/3.jpg" class=""><ol><li>运行<code>npm install hexo-cli -g</code></li><li><code>npm -v</code></li><li><code>hexo init [your project]</code> </li><li><code>cd [your project]</code></li><li><code>hexo g</code></li><li><code>hexo s</code></li><li>到这里就算安装成功Hexo，可以运行本地服务器预览</li></ol><p>4.然后就是更换Fluid主题，这里可以选择别的主题</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello, World!</title>
+    <link href="/2023/01/15/hello-world/"/>
+    <url>/2023/01/15/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>经过一番折腾，终于配置部署好了这个博客。本站采用了最常用的Hexo框架+Github Pages部署作为解决方法，后续再慢慢对Fluid主题进行自定义配置完善。在这里，我会记录下一些日常能想到或者自己折腾的小技术分享或学习路程的笔记。</p>]]></content>
     
     
     
