@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="icon" href="/imgaes/meteor_fall.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,19 +16,20 @@
   <meta name="author" content="ccchoi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的方法。 建站原理通常来说，建立个人博客一般包含四个部分：  博客生成框架（可以理解为将用户的输入快速生成HTML、CSS、Javascript等前端界面，对博客进行快速且简便的设置）- Hexo  文件托管平台（文件托管平台，为用户提供访问和修改的接口，好比如将博客的所需的文件存放在云端）- GitHub">
+    <meta name="description" content="本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的大致方法。  建站原理搭建类似本站博客的原理主要有以下四个部分：  博客框架（将用户的输入快速生成由HTML、CSS、JavaScript组成的前端界面，可以对博客进行快速且简便的设置）  常见的博客框架：Hexo WordPress VuePress Hugo Solo Halo Jekyll   代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Hexo + GitHub Pages的博客建站教程">
-<meta property="og:url" content="http://example.com/2023/01/25/Hexo%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:url" content="http://example.com/2023/01/25/hexo-%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="ccchoi&#39;s blog">
-<meta property="og:description" content="本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的方法。 建站原理通常来说，建立个人博客一般包含四个部分：  博客生成框架（可以理解为将用户的输入快速生成HTML、CSS、Javascript等前端界面，对博客进行快速且简便的设置）- Hexo  文件托管平台（文件托管平台，为用户提供访问和修改的接口，好比如将博客的所需的文件存放在云端）- GitHub">
+<meta property="og:description" content="本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的大致方法。  建站原理搭建类似本站博客的原理主要有以下四个部分：  博客框架（将用户的输入快速生成由HTML、CSS、JavaScript组成的前端界面，可以对博客进行快速且简便的设置）  常见的博客框架：Hexo WordPress VuePress Hugo Solo Halo Jekyll   代">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/01/25/Hexo%E6%95%99%E7%A8%8B/3.jpg">
+<meta property="og:image" content="http://example.com/2023/01/25/hexo-%E6%95%99%E7%A8%8B/3.jpg">
 <meta property="article:published_time" content="2023-01-25T06:57:08.000Z">
-<meta property="article:modified_time" content="2023-02-14T14:02:17.253Z">
+<meta property="article:modified_time" content="2023-02-26T15:21:48.489Z">
 <meta property="article:author" content="ccchoi">
+<meta property="article:tag" content="建站">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/01/25/Hexo%E6%95%99%E7%A8%8B/3.jpg">
+<meta name="twitter:image" content="http://example.com/2023/01/25/hexo-%E6%95%99%E7%A8%8B/3.jpg">
   
   
   
@@ -209,7 +210,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/imgaes/venti-views-cHRDevKFDBw-unsplash.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -238,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          601 字
+          661 字
         
       </span>
     
@@ -300,19 +301,33 @@
             
               <div class="markdown-body">
                 
-                <p>本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的方法。</p>
-<h3 id="建站原理"><a href="#建站原理" class="headerlink" title="建站原理"></a>建站原理</h3><p>通常来说，建立个人博客一般包含四个部分：</p>
+                <blockquote>
+<p>本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的大致方法。</p>
+</blockquote>
+<h2 id="建站原理"><a href="#建站原理" class="headerlink" title="建站原理"></a>建站原理</h2><p>搭建类似本站博客的原理主要有以下四个部分：</p>
 <ol>
-<li><p>博客生成框架（可以理解为将用户的输入快速生成HTML、CSS、Javascript等前端界面，对博客进行快速且简便的设置）- <code>Hexo</code></p>
+<li><p>博客框架（将用户的输入快速生成由HTML、CSS、JavaScript组成的前端界面，可以对博客进行快速且简便的设置）</p>
+<blockquote>
+<p>常见的博客框架：<code>Hexo</code> <code>WordPress</code> <code>VuePress</code> <code>Hugo</code> <code>Solo</code> <code>Halo</code> <code>Jekyll</code></p>
+</blockquote>
 </li>
-<li><p>文件托管平台（文件托管平台，为用户提供访问和修改的接口，好比如将博客的所需的文件存放在云端）- <code>GitHub</code> <code>Gitee</code></p>
+<li><p>代码托管平台（为用户提供访问和修改的接口，将博客所需的文件、代码存放在云端）</p>
+<blockquote>
+<p>常见的平台：<code>Github</code> <code>Gitee</code></p>
+</blockquote>
 </li>
-<li><p>站点部署服务（将成形的博客网站目录部署到互联网上，以便访问浏览）- <code>GitHub Pages</code> <code>Netify</code></p>
+<li><p>站点部署服务（将博客网站目录部署到互联网以便访问浏览）</p>
+<blockquote>
+<p>常见的部署服务：<code>GitHub Pages</code> <code>Netify</code></p>
+</blockquote>
 </li>
-<li><p>访问加速服务（CDN加速，通过多结点的缓存来提高网络内容的解析和访问速度）- <code>Cloudfare</code></p>
+<li><p>访问加速服务（CDN加速，通过多节点缓存来提高网络内容的解析和访问速度） </p>
+<blockquote>
+<p>常见的加速服务：<code>Cloudfare</code> <code>Alibaba</code> <code>Tencent</code></p>
+</blockquote>
 </li>
 </ol>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="1-GitHub账号注册与创建仓库"><a href="#1-GitHub账号注册与创建仓库" class="headerlink" title="1.GitHub账号注册与创建仓库"></a>1.GitHub账号注册与创建仓库</h4><p>首先必须拥有一个GitHub账号，注册就不作详细说明。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="GitHub账号注册与创建仓库"><a href="#GitHub账号注册与创建仓库" class="headerlink" title="GitHub账号注册与创建仓库"></a>GitHub账号注册与创建仓库</h3><p>首先必须拥有一个GitHub账号，注册就不作详细说明。</p>
 <p>注册好账号进入<code>Repositories</code>选择<code>New</code>新建一个仓库。</p>
 
 
@@ -322,7 +337,7 @@
 <h4 id="2-Git的安装与配置"><a href="#2-Git的安装与配置" class="headerlink" title="2.Git的安装与配置"></a>2.Git的安装与配置</h4><p>3.NodeJS的安装与配置</p>
 <p>3.安装Hexo框架</p>
 <p>任意路径打开Git Bash</p>
-<img src="/2023/01/25/Hexo%E6%95%99%E7%A8%8B/3.jpg" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/01/25/hexo-%E6%95%99%E7%A8%8B/3.jpg" srcset="/img/loading.gif" lazyload class="">
 
 <ol>
 <li>运行<code>npm install hexo-cli -g</code></li>
@@ -343,6 +358,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BB%BA%E7%AB%99/">#建站</a>
+      
+    </div>
+  
 </div>
 
 
@@ -352,7 +374,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>基于Hexo + GitHub Pages的博客建站教程</div>
-      <div>http://example.com/2023/01/25/Hexo教程/</div>
+      <div>http://example.com/2023/01/25/hexo-教程/</div>
     </div>
     <div class="license-meta">
       

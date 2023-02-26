@@ -5,12 +5,18 @@
   
   <entry>
     <title>基于Hexo + GitHub Pages的博客建站教程</title>
-    <link href="/2023/01/25/Hexo%E6%95%99%E7%A8%8B/"/>
-    <url>/2023/01/25/Hexo%E6%95%99%E7%A8%8B/</url>
+    <link href="/2023/01/25/hexo-%E6%95%99%E7%A8%8B/"/>
+    <url>/2023/01/25/hexo-%E6%95%99%E7%A8%8B/</url>
     
-    <content type="html"><![CDATA[<p>本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的方法。</p><h3 id="建站原理"><a href="#建站原理" class="headerlink" title="建站原理"></a>建站原理</h3><p>通常来说，建立个人博客一般包含四个部分：</p><ol><li><p>博客生成框架（可以理解为将用户的输入快速生成HTML、CSS、Javascript等前端界面，对博客进行快速且简便的设置）- <code>Hexo</code></p></li><li><p>文件托管平台（文件托管平台，为用户提供访问和修改的接口，好比如将博客的所需的文件存放在云端）- <code>GitHub</code> <code>Gitee</code></p></li><li><p>站点部署服务（将成形的博客网站目录部署到互联网上，以便访问浏览）- <code>GitHub Pages</code> <code>Netify</code></p></li><li><p>访问加速服务（CDN加速，通过多结点的缓存来提高网络内容的解析和访问速度）- <code>Cloudfare</code></p></li></ol><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="1-GitHub账号注册与创建仓库"><a href="#1-GitHub账号注册与创建仓库" class="headerlink" title="1.GitHub账号注册与创建仓库"></a>1.GitHub账号注册与创建仓库</h4><p>首先必须拥有一个GitHub账号，注册就不作详细说明。</p><p>注册好账号进入<code>Repositories</code>选择<code>New</code>新建一个仓库。</p><p>在<code>Repository name</code>这里填写<code>你的用户名.github.io</code>，一定要按照此格式填写，填写好就可以创建了。</p><h4 id="2-Git的安装与配置"><a href="#2-Git的安装与配置" class="headerlink" title="2.Git的安装与配置"></a>2.Git的安装与配置</h4><p>3.NodeJS的安装与配置</p><p>3.安装Hexo框架</p><p>任意路径打开Git Bash</p><img src="/2023/01/25/Hexo%E6%95%99%E7%A8%8B/3.jpg" class=""><ol><li>运行<code>npm install hexo-cli -g</code></li><li><code>npm -v</code></li><li><code>hexo init [your project]</code> </li><li><code>cd [your project]</code></li><li><code>hexo g</code></li><li><code>hexo s</code></li><li>到这里就算安装成功Hexo，可以运行本地服务器预览</li></ol><p>4.然后就是更换Fluid主题，这里可以选择别的主题</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>本文将介绍和总结我参考Web上的教程来配置GitHub Pages部署和Hexo框架建立博客的大致方法。</p></blockquote><h2 id="建站原理"><a href="#建站原理" class="headerlink" title="建站原理"></a>建站原理</h2><p>搭建类似本站博客的原理主要有以下四个部分：</p><ol><li><p>博客框架（将用户的输入快速生成由HTML、CSS、JavaScript组成的前端界面，可以对博客进行快速且简便的设置）</p><blockquote><p>常见的博客框架：<code>Hexo</code> <code>WordPress</code> <code>VuePress</code> <code>Hugo</code> <code>Solo</code> <code>Halo</code> <code>Jekyll</code></p></blockquote></li><li><p>代码托管平台（为用户提供访问和修改的接口，将博客所需的文件、代码存放在云端）</p><blockquote><p>常见的平台：<code>Github</code> <code>Gitee</code></p></blockquote></li><li><p>站点部署服务（将博客网站目录部署到互联网以便访问浏览）</p><blockquote><p>常见的部署服务：<code>GitHub Pages</code> <code>Netify</code></p></blockquote></li><li><p>访问加速服务（CDN加速，通过多节点缓存来提高网络内容的解析和访问速度） </p><blockquote><p>常见的加速服务：<code>Cloudfare</code> <code>Alibaba</code> <code>Tencent</code></p></blockquote></li></ol><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="GitHub账号注册与创建仓库"><a href="#GitHub账号注册与创建仓库" class="headerlink" title="GitHub账号注册与创建仓库"></a>GitHub账号注册与创建仓库</h3><p>首先必须拥有一个GitHub账号，注册就不作详细说明。</p><p>注册好账号进入<code>Repositories</code>选择<code>New</code>新建一个仓库。</p><p>在<code>Repository name</code>这里填写<code>你的用户名.github.io</code>，一定要按照此格式填写，填写好就可以创建了。</p><h4 id="2-Git的安装与配置"><a href="#2-Git的安装与配置" class="headerlink" title="2.Git的安装与配置"></a>2.Git的安装与配置</h4><p>3.NodeJS的安装与配置</p><p>3.安装Hexo框架</p><p>任意路径打开Git Bash</p><img src="/2023/01/25/hexo-%E6%95%99%E7%A8%8B/3.jpg" class=""><ol><li>运行<code>npm install hexo-cli -g</code></li><li><code>npm -v</code></li><li><code>hexo init [your project]</code> </li><li><code>cd [your project]</code></li><li><code>hexo g</code></li><li><code>hexo s</code></li><li>到这里就算安装成功Hexo，可以运行本地服务器预览</li></ol><p>4.然后就是更换Fluid主题，这里可以选择别的主题</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>建站</tag>
+      
+    </tags>
     
   </entry>
   
@@ -21,9 +27,15 @@
     <link href="/2023/01/15/hello-world/"/>
     <url>/2023/01/15/hello-world/</url>
     
-    <content type="html"><![CDATA[<p>经过一番折腾，终于配置部署好了这个博客。本站采用了最常用的Hexo框架+Github Pages部署作为解决方法，后续再慢慢对Fluid主题进行自定义配置完善。在这里，我会记录下一些日常能想到或者自己折腾的小技术分享或学习路程的笔记。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Hello! 博客开张了…</p></blockquote><p>经过多番折腾，终于配置部署好了这个博客。本站采用了最常用的Hexo框架+Github Pages部署作为解决方法，后续再慢慢对Fluid主题进行自定义配置完善修改。在这里，我会记录下一些日常自己折腾的小技术分享或自己学习路程的各种笔记，可以当作是笔记本、个人空间吧hh。</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>New</tag>
+      
+    </tags>
     
   </entry>
   
