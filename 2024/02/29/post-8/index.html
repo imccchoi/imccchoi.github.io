@@ -1,0 +1,1047 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ccchoi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在学习了解过 51 单片机的基本外设和其应用，对单片机作好铺垫后，肯定就到了 STM32 的学习，我选择直接学习可以快速上手的 HAL 库。本文记录基于 STM32F103C8T6 HAL 库入门开发教程的学习笔记。  0. 前置知识STM32 内部结构以 STM32F103xx 型号为例，该芯片由 Cortex-M3 内核 和 片上内设 组成。 ICode 总线：’I’ 代表 “Instruc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32 HAL库开发学习笔记">
+<meta property="og:url" content="https://imccchoi.github.io/2024/02/29/post-8/index.html">
+<meta property="og:site_name" content="ccchoi&#39;s blog">
+<meta property="og:description" content="在学习了解过 51 单片机的基本外设和其应用，对单片机作好铺垫后，肯定就到了 STM32 的学习，我选择直接学习可以快速上手的 HAL 库。本文记录基于 STM32F103C8T6 HAL 库入门开发教程的学习笔记。  0. 前置知识STM32 内部结构以 STM32F103xx 型号为例，该芯片由 Cortex-M3 内核 和 片上内设 组成。 ICode 总线：’I’ 代表 “Instruc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imccchoi.github.io/img/post-8.webp">
+<meta property="article:published_time" content="2024-02-29T13:01:44.000Z">
+<meta property="article:modified_time" content="2024-03-26T15:23:02.039Z">
+<meta property="article:author" content="ccchoi">
+<meta property="article:tag" content="STM32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imccchoi.github.io/img/post-8.webp">
+  
+  
+  
+  <title>STM32 HAL库开发学习笔记 - ccchoi&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"imccchoi.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"7Q1xJx2ndhLnhYKsA9238DE8-gzGzoHsz","app_key":"nJQ4gTqt8ER4RXQCeeP76SCB","server_url":"https://7q1xjx2n.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ccchoi&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/venti-views-cHRDevKFDBw-unsplash.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32 HAL库开发学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-29 21:01" pubdate>
+          2024年2月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">STM32 HAL库开发学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>在学习了解过 51 单片机的基本外设和其应用，对单片机作好铺垫后，肯定就到了 STM32 的学习，我选择直接学习可以快速上手的 HAL 库。本文记录基于 STM32F103C8T6 HAL 库入门开发教程的学习笔记。</p>
+</blockquote>
+<h2 id="0-前置知识"><a href="#0-前置知识" class="headerlink" title="0. 前置知识"></a>0. 前置知识</h2><h3 id="STM32-内部结构"><a href="#STM32-内部结构" class="headerlink" title="STM32 内部结构"></a>STM32 内部结构</h3><p>以 <strong>STM32F103xx</strong> 型号为例，该芯片由 <code>Cortex-M3 内核</code> 和 <code>片上内设</code> 组成。</p>
+<p>ICode 总线：’I’ 代表 “Instruction”，该总线作用是 <code>取指</code>，它会一直从 <code>Flash</code> 中读取存储的数据。<br>总线矩阵：协调仲裁 DCode 总线、System 总线、DMA 总线之间的数据传输。</p>
+<p>除了该总线，一般分为 4 个 <code>驱动单元</code> 和 4 个 <code>被动单元</code>。</p>
+<p>驱动单元：</p>
+<ul>
+<li>Dcode 总线：’D’ 代表 ‘data’，该总线作用是 <code>取数</code>，它会从 Flash 中读取数据常量，从 SRAM 中读取数据变量。</li>
+<li>System 总线：主要访问外设的寄存器。通过此总线读写寄存器。</li>
+<li>DMA 总线 x2：DMA 总线也是用作传输数据，数据可以在某个外设的数据寄存器（Flash 或 SRAM）。</li>
+</ul>
+<p>被动单元：</p>
+<ul>
+<li>内部 Flash：存储数据和指令的地方。</li>
+<li>内部 SRAM：程序的变量、堆栈的开销都在此区域发生。</li>
+<li>FSMC：Flexible Static Memory Controller，通过此控制器可以扩展内存。</li>
+<li>AHB - APB桥：AHB 分为 APB2 和 APB1 总线，这些总线上挂载在 STM32 的各种外设。<blockquote>
+<p>英文全称：Advanced High Performance Bus &#x2F; Advanced Peripheral Bus</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="存储器映射"><a href="#存储器映射" class="headerlink" title="存储器映射"></a>存储器映射</h3><p>被控单元的FLASH，RAM，FSMC 和 AHB 到 APB 的桥（即片上外设），这些功能部件共同排列在一个4GB 的地址空间内。厂商也预先为这些分配好相应的物理内存地址。</p>
+<p>4GB 的空间被分为 8 小块 512MB，每一小块称作一个 block，对应着不同的地址区间，给已经分配好地址的有特定功能的内存单元取别名的过程就叫寄存器映射。</p>
+<blockquote>
+<p>此部分具体阅读野火 HAL 库实战开发指南的第 4 和第 5 章，此部分可以对整个架构和寄存器原理有一个初步理解。<br><strong>[野火] STM32 HAL 库开发实战指南——基于 F103 系列开发板</strong></p>
+<p><strong>第 4 章：<a target="_blank" rel="noopener" href="https://doc.embedfire.com/mcu/stm32/f103/hal_general/zh/latest/doc/chapter4/chapter4.html">初识 STM32</a></strong><br><strong>第 5 章：<a target="_blank" rel="noopener" href="https://doc.embedfire.com/mcu/stm32/f103/hal_general/zh/latest/doc/chapter5/chapter5.html">什么是寄存器</a></strong></p>
+</blockquote>
+<h2 id="1-点灯大师"><a href="#1-点灯大师" class="headerlink" title="1. 点灯大师"></a>1. 点灯大师</h2><h3 id="1-1-原理"><a href="#1-1-原理" class="headerlink" title="1.1 原理"></a>1.1 原理</h3><p>根据原理图 <code>LED</code> 负极接 <code>GND</code> 和二极管的单向导通性（正极 -&gt; 负极），通过控制 STM32 <code>GPIO</code> 引脚使用 <code>Push-Pull Output</code>，输出 3.3V 高电平使 LED 导通。</p>
+<ul>
+<li>LED - Light-Emitting Diode，发光二极管。</li>
+<li>GND - Ground 的缩写，表示接“地”，但是不是真正意义的“地”，是电路中基准电位。</li>
+<li>GPIO：通用输入输出（General Purpose Input and Output），GPIO 引脚可以读取外部输入电压和向外输出一定电压值。</li>
+<li>推挽输出 &amp; 开漏输出：当 GPIO 处于输出模式时，GPIO 内部的两个 MOS 管（PMOS &amp; NMOS）排列组合共有 4 个状态：<ul>
+<li>（PMOS 高电平导通，NMOS 低电平导通）</li>
+<li>PMOS 打开 | NMOS 关闭 - 输出高电平</li>
+<li>PMOS 关闭 | NMOS 打开 - 输出低电平</li>
+<li>PMOS 关闭 | NMOS 关闭 - 浮空，即高阻态</li>
+<li>PMOS 打开 | NMOS 打开 - VCC直接连通GND短路，MOS管烧坏，不存在这种状态</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-实验"><a href="#1-2-实验" class="headerlink" title="1.2 实验"></a>1.2 实验</h3><ul>
+<li><p>假设使用高电平点亮绿灯，在 <code>Pinout view</code> 中选中 <code>PA7</code> 引脚，选择 <code>GPIO_Output</code>并配置 <code>GPIO output level</code> 为 <code>high</code>。</p>
+</li>
+<li><p>假如让 LED 灯进行闪烁，在 <code>MX_GPIO_Init()</code> 代码片段编写以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>&#123;<br>    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET); <span class="hljs-comment">// 参数 GPIO_PIN_SET 设置高电平</span><br>    HAL_Delay(<span class="hljs-number">500</span>); <span class="hljs-comment">// 延时函数，参数单位为毫秒（ms）</span><br>    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); <span class="hljs-comment">// 参数 GPIO_PIN_RESET 设置高电平</span><br>    HAL_Delay(<span class="hljs-number">500</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>IDE技巧和细节：</p>
+<ul>
+<li><code>ALT</code> + <code>/</code> - 代码提示</li>
+<li>保留用户代码需要将编写的代码置于 <code>BEIGIN</code> 和 <code>END</code> 注释区间</li>
+<li>引脚视图中每个引脚右键选中 <code>Enter user label</code> 可以重命名引脚名称，方便记忆与配置</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-按键"><a href="#2-按键" class="headerlink" title="2. 按键"></a>2. 按键</h2><h3 id="2-1-原理"><a href="#2-1-原理" class="headerlink" title="2.1 原理"></a>2.1 原理</h3><p>根据原理图，KEY 未按下时，KEY 不接地处于断路状态，直接连通一个上拉电阻到 3.3V 电源。通过设定 GPIO 为 浮空输入模式，浮空输入模式的 GPIO 内部处于高阻态（相当于芯片内部有一个巨大的电阻），那么这个上拉电阻压降几乎为 0V，所以 GPIO 的电压近似可以等于接通 3.3V（高电平）。当 KEY 按下后，通路形成，KEY 处于接地状态，GPIO 即处于低电平 0V 状态。</p>
+<ul>
+<li>上拉：使用电源将 GPIO 的电平拉高的操作称作上拉，通常需要一个上拉电阻配合。</li>
+<li>下拉：类似上拉，接通的不是电源而是接地的话，那么该操作称为下拉。</li>
+<li>电压降：电流流过负载以后相对于同一参考点的电势（电位）变化称为电压降，简称压降。</li>
+<li>浮空输入模式：输入信号经过施密特触发器接入输入数据存储器。当无信号输入时，电压不确定。</li>
+<li>消抖：硬件消抖可以采用电容，但传统软件消抖方法是使用延时函数。</li>
+</ul>
+<h3 id="2-2-实验"><a href="#2-2-实验" class="headerlink" title="2.2 实验"></a>2.2 实验</h3><ul>
+<li><p>假设使用 KEY1 点亮蓝灯，在 <code>Pinout view</code> 中选中 KEY1 的 <code>GPIO_Input</code> 后，编写以下自定义代码片段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>&#123;<br> HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin); <span class="hljs-comment">// 使用 ReadPin 函数读取是否为低电平</span><br> <span class="hljs-keyword">if</span> (HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin) == GPIO_PIN_RESET)<br> &#123;<br>  HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_SET);<br> &#125;<span class="hljs-keyword">else</span><br>    &#123;<br>  HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);<br> &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>STM32 内部有内置的上拉或下拉电阻，即原理图上的 KEY2 没有连接任何电阻。在引脚设置中同样选中 KEY2 的 <code>GPIO_Input</code>，打开详细配置可以发现上拉下拉中默认为<code>no pull-up and on pull-down</code>，即默认为浮空输入模式，然后需要选择使用内部的 <code>pull-up</code> 上拉电阻后编写以下自定义代码片段使用 KEY2 控制红灯亮灭切换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>&#123;<br>	<span class="hljs-keyword">if</span> (HAL_GPIO_ReadPin(KEY2_GPIO_Port, KEY2_Pin) == GPIO_PIN_RESET)<br>	&#123;<br>		  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin); <span class="hljs-comment">// 使用 TogglePin 函数切换高低电平</span><br>		  <span class="hljs-keyword">while</span>(HAL_GPIO_ReadPin(KEY2_GPIO_Port, KEY2_Pin) == GPIO_PIN_RESET)&#123;&#125; <span class="hljs-comment">// 使用 while 检测按键是否被松开，再继续执行逻辑</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>软件消抖方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>&#123;<br>	<span class="hljs-keyword">if</span> (HAL_GPIO_ReadPin(KEY2_GPIO_Port, KEY2_Pin) == GPIO_PIN_RESET)<br>	&#123;<br>		HAL_Delay(<span class="hljs-number">10</span>); <span class="hljs-comment">// 按键按下后，初次读取电平后延时 10ms</span><br>		<span class="hljs-keyword">if</span> (HAL_GPIO_ReadPin(KEY2_GPIO_Port, KEY2_Pin) == GPIO_PIN_RESET) <span class="hljs-comment">// 待稳定后再次读取电平</span><br>		&#123;<br>			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin); <span class="hljs-comment">// 使用 TogglePin 函数切换高低电平</span><br>		  	<span class="hljs-keyword">while</span>(HAL_GPIO_ReadPin(KEY2_GPIO_Port, KEY2_Pin) == GPIO_PIN_RESET)&#123;&#125; <span class="hljs-comment">// 使用 while 检测按键是否被松开，再继续执行逻辑</span><br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-GPIO-深入理解"><a href="#3-GPIO-深入理解" class="headerlink" title="3. GPIO 深入理解"></a>3. GPIO 深入理解</h2><p>在 STM32 参考手册内可以找到 GPIO 引脚内部结构如下图所示，GPIO 有八大功能模式，其主要分为<strong>输出</strong>和<strong>输入</strong>两部分。</p>
+<h3 id="3-1-引脚部分"><a href="#3-1-引脚部分" class="headerlink" title="3.1 引脚部分"></a>3.1 引脚部分</h3><p>因为引脚能承受的电压有限，引脚部分两侧是两个保护二极管，类似静电等瞬间电压进入引脚时，如果电压大于 VDD 3.3V，上方二极管导通；若电压小于VSS 0V时，下方二极管导通。尽管有保护二极管，长时间接入高负载电压也是会损坏芯片。（部分 IO 口可以承受 5V 电压）</p>
+<img src="/2024/02/29/post-8/post-8-1.png" srcset="/img/loading.gif" lazyload class="">
+
+<h3 id="3-2-输出部分"><a href="#3-2-输出部分" class="headerlink" title="3.2 输出部分"></a>3.2 输出部分</h3><ul>
+<li><p>推挽输出：因为 PMOS 管高电平导通，VDD 输出 3.3V 高电平，这一动作称为“推”。反之，低电平 NMOS 导通，GND 输出 0V 低电平，电流往 GND 流动，这一动作称作“挽”。推挽输出具有一定的电压和电流驱动能力，但能力不高，比如 5V 的器件无法驱动。</p>
+</li>
+<li><p>开漏输出：在此模式下，PMOS 管不工作，只会使用到 NMOS。GPIO 输出高电平 NMOS 不导通，即处于高阻态模式。假设我们想驱动一个连接外部 5V VDD 的工作电压为 5V 器件，那么输出高低电平就可以控制这个器件工作。开漏输出没有驱动能力，但其更加灵活，可以依靠外部电压源。</p>
+</li>
+<li><p>复用推挽输出：区别于普通推挽输出的复用模式，其输出源来自片上外设。</p>
+</li>
+<li><p>复用开漏输出：区别于普通开漏输出的复用模式，其输出源来自片上外设。</p>
+</li>
+</ul>
+<h3 id="3-3-输入部分"><a href="#3-3-输入部分" class="headerlink" title="3.3 输入部分"></a>3.3 输入部分</h3><p>由于电压并不总是稳定的，电流在输入部分会流经一个施密特触发器，其带有两个参考电压值，判断和输出处理的电平信号，即 1 和 0。后面的输入数据寄存器就可以读取输入的电平。</p>
+<ul>
+<li><p>上拉输入：设置上拉输入，上拉电阻启用。</p>
+</li>
+<li><p>下拉输入：设置下拉输入，下拉电阻启用。</p>
+</li>
+<li><p>浮空输入：两个上下拉电阻均不启用，可以依赖外部电路实现更丰富的功能。</p>
+</li>
+<li><p>模拟输入：读取具体的电压数值，它在施密特触发器之前，将电压引入至与模拟输入相关的片上外设。</p>
+</li>
+</ul>
+<h2 id="4-中断"><a href="#4-中断" class="headerlink" title="4. 中断"></a>4. 中断</h2><p>中断是 CPU 在接收到中断源信号后转而优先处理中断源任务的一个过程。 举例一个简单的中断输入结构和流程，当按键按下后，外部电平信号经过上下拉电阻、施密特触发器转换、最后抵达输入数据寄存器或者片上外设。再进一步，电平信号会抵达以下结构，即外部<strong>中断&#x2F;事件控制器</strong>。</p>
+<h3 id="4-1-中断-事件控制器结构"><a href="#4-1-中断-事件控制器结构" class="headerlink" title="4.1 中断&#x2F;事件控制器结构"></a>4.1 中断&#x2F;事件控制器结构</h3><ul>
+<li>STM32 一共有 19 组这样的线路结构，每一个外部中断都应着其中的一组线路，也称作<strong>外部中断线</strong>，前 16 组 <code>EXIT0</code> ~ <code>EXIT15</code> 分别对应相应的 GPIO。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>中断号</th>
+<th>GPIO引脚</th>
+<th>GPIO引脚</th>
+<th>GPIO引脚</th>
+<th>GPIO引脚</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXIT0</td>
+<td>PA0</td>
+<td>PB0</td>
+<td>PC0</td>
+<td>PD0</td>
+</tr>
+<tr>
+<td>EXIT1</td>
+<td>PA1</td>
+<td>PB1</td>
+<td>PC1</td>
+<td>PD1</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+</tr>
+<tr>
+<td>EXITX</td>
+<td>PAX</td>
+<td>PBX</td>
+<td>PCX</td>
+<td>PDX</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>脉冲发生器</code> 和 <code>事件屏蔽器</code> 可以先暂时忽略，是与 <code>事件</code> 相关的。中断信号是会抵达处理器调用代码进行处理。而事件信号是送达相应的外设，由外设自行处理。</li>
+</ul>
+<img src="/2024/02/29/post-8/post-8-2.png" srcset="/img/loading.gif" lazyload class="">
+
+<br/>
+
+<br/>
+
+<h3 id="4-2-原理"><a href="#4-2-原理" class="headerlink" title="4.2 原理"></a>4.2 原理</h3><p>电信号进入 <code>边沿检测电路</code> ，由 <code>上升沿</code> 和 <code>上升沿</code> 两个触发选择寄存器（CubeMX 选择）检测后输出高电平，请求挂起寄存器接收到电信号后，将其第 12 位置 1，再次将电信号传到一个与门，当 <code>中断屏蔽寄存器</code> 中的第 12 位 同样置 1 时，那么电信号才能再次输送到 <code>NVIC（中断控制器）</code>。</p>
+<ul>
+<li>到达 NVIC 后，控制器会根据几号的外部中断线，选择对应的中断向量，随后执行相应的处理函数。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称（中断向量）</th>
+<th>处理函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXIT0</td>
+<td>EXIT0_IRQHandler</td>
+</tr>
+<tr>
+<td>EXIT1</td>
+<td>EXIT1_IRQHandler</td>
+</tr>
+<tr>
+<td>EXIT2</td>
+<td>EXIT2_IRQHandler</td>
+</tr>
+<tr>
+<td>EXIT3</td>
+<td>EXIT3_IRQHandler</td>
+</tr>
+<tr>
+<td>EXIT4</td>
+<td>EXIT4_IRQHandler</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+</tr>
+<tr>
+<td>EXIT9_5</td>
+<td>EXIT9_5_IRQHandler</td>
+</tr>
+<tr>
+<td>EXIT15_10</td>
+<td>EXIT15_10_IRQHandler</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>由于 NVIC 会一直检测中断线是否处于激活状态，所以在执行一次处理函数后便需要重置 <code>请求挂起寄存器</code>，CubeMX 会自动生成函数代码执行这个操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_GPIO_EXIT_IRQHandler();<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-3-中断优先级"><a href="#4-3-中断优先级" class="headerlink" title="4.3 中断优先级"></a>4.3 中断优先级</h3><p>倘若多个中断同时发生，单片机如何安排这些执行顺序？STM32 中断优先级分为两种（数字越小越优先）：</p>
+<ul>
+<li>抢占优先级</li>
+<li>响应优先级</li>
+</ul>
+<p>NVIC 会有以下的判断规则：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>比较顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 - 两个中断同时发生</td>
+<td>1 - 抢占优先级</td>
+</tr>
+<tr>
+<td></td>
+<td>2 - 响应优先级</td>
+</tr>
+<tr>
+<td></td>
+<td>3 - 向量表数字</td>
+</tr>
+<tr>
+<td>2- A执行中，B发生</td>
+<td>1 - 抢占优先级</td>
+</tr>
+</tbody></table>
+<p>STM32 每个中断向量准备 4 个二进制位来储存中断优先级信息，CubeMX 默认是 4 位都设置抢占优先级（0 ~ 15）</p>
+<h3 id="4-3-实验"><a href="#4-3-实验" class="headerlink" title="4.3 实验"></a>4.3 实验</h3><p><code>main.c</code> 编写 LED 亮灭代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>&#123;<br> HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_SET);<br> HAL_Delay(<span class="hljs-number">2000</span>);<br> HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);<br> HAL_Delay(<span class="hljs-number">2000</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>将 <code>PB12</code> 引脚设置为 <code>GPIO_EXIT2</code>，并选择<code>下沿触发模式</code>；设置 NVIC 模块中 <code>System Tick</code> 抢占优先级（14） &gt;<code> EXIT line</code> 抢占优先级（15）</p>
+<p><code>stm32f1xx_it.c</code> 编写中断函数 - 检测到下沿触发后执行此函数：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">void EXTI15_10_IRQHandler(void)<br>&#123;<br>  /* <span class="hljs-keyword">USER</span> <span class="hljs-title">CODE</span> BEGIN EXTI15_10_IRQn <span class="hljs-number">0</span> */<br>	HAL_Delay(<span class="hljs-number">10</span>);<br>	if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin) == GPIO_PIN_RESET)<br>	&#123;<br>		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);<br>	&#125;<br>  /* <span class="hljs-keyword">USER</span> <span class="hljs-title">CODE</span> END EXTI15_10_IRQn <span class="hljs-number">0</span> */<br>  HAL_GPIO_EXTI_IRQHandler(KEY1_Pin);<br>  /* <span class="hljs-keyword">USER</span> <span class="hljs-title">CODE</span> BEGIN EXTI15_10_IRQn <span class="hljs-number">1</span> */<br><br>  /* <span class="hljs-keyword">USER</span> <span class="hljs-title">CODE</span> END EXTI15_10_IRQn <span class="hljs-number">1</span> */<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-串口通信"><a href="#5-串口通信" class="headerlink" title="5. 串口通信"></a>5. 串口通信</h2><h3 id="5-1-原理"><a href="#5-1-原理" class="headerlink" title="5.1 原理"></a>5.1 原理</h3><p>普通 TTL 串口的收发结构如下图所示，TX 是发送端，RX 是接收端，GND 是共地（设备正常通讯的前提，保证同一电平）</p>
+<img src="/2024/02/29/post-8/post-8-3.png" srcset="/img/loading.gif" lazyload class="">
+
+<br/>
+
+<br/>
+
+<h3 id="5-2-USART-实验"><a href="#5-2-USART-实验" class="headerlink" title="5.2 USART 实验"></a>5.2 USART 实验</h3><p><strong>USART 全称：Universal Synchronous &#x2F; Asynchronous Receiver &amp; Transmitter（通用同步&#x2F;异步接收发送器）</strong>。</p>
+<p>TTL 串口使用的是异步通信方式。打开 CubeMX，在 <code>Connectivity</code> 下可以见到有 3 个 USART 外设资源。 根据原理图，这里调试串口使用的 IO 口是 <code>PA2</code>、<code>PA3</code>。</p>
+<img src="/2024/02/29/post-8/post-8-4.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>将 PA2 引脚设置为 USART2_TX，同时设置 Mode 为 Asynchronous，随后 PA2 和 PA3 自动分别设置为 TX 和 RX。还需要特别注意一些参数：</p>
+<ul>
+<li>波特率：Baud Rate - 每秒多少次高低电平信号。TTL 串口默认每次传输一个字节（Byte）数据，同时还要添加前后的起始位和停止位，即总共 10bit。通信设备两端都要使用一样的波特率才可以正常通信。</li>
+</ul>
+<img src="/2024/02/29/post-8/post-8-5.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>发送数据到 PC - 编写代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c">  MX_USART2_UART_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  <span class="hljs-type">char</span> message[] = <span class="hljs-string">&quot;Hello!&quot;</span>;<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  &#123;<br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br>    HAL_UART_Transmit(&amp;huart2, (<span class="hljs-type">uint8_t</span>*)message, <span class="hljs-built_in">strlen</span>(message), <span class="hljs-number">100</span>);<br>    HAL_Delay(<span class="hljs-number">1000</span>);<br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  &#125;<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接受来自 PC 数据 - 编写代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c"> <span class="hljs-comment">/* Initialize all configured peripherals */</span><br> MX_GPIO_Init();<br> MX_USART2_UART_Init();<br> <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br><br> <span class="hljs-type">uint8_t</span> dataReceived[<span class="hljs-number">2</span>]; <span class="hljs-comment">// 声明接受数据数组</span><br><br> <span class="hljs-comment">/* USER CODE END 2 */</span><br><br> <span class="hljs-comment">/* Infinite loop */</span><br> <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br> <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br> &#123;<br>   HAL_UART_Receive(&amp;huart2, dataReceived, <span class="hljs-number">2</span>, HAL_MAX_DELAY); <span class="hljs-comment">// 调用接收函数</span><br>   HAL_UART_Transmit(&amp;huart2, dataReceived, <span class="hljs-number">2</span>, <span class="hljs-number">100</span>); <span class="hljs-comment">// 调用发送函数</span><br>   <br>   GPIO_PinState state = GPIO_PIN_RESET;<br><br><span class="hljs-comment">// 根据接收的数据判断逻辑控制小灯亮灭</span><br>   <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;0&#x27;</span>)<br>   &#123;<br>     state = GPIO_PIN_SET;<br>   &#125;<br>   <br>   <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;R&#x27;</span>)<br>   &#123;<br>     HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, state);<br>   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;G&#x27;</span>)<br>   &#123;<br>     HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, state);<br>   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;B&#x27;</span>)<br>   &#123;<br>     HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, state);<br>   &#125;<br><br>   <span class="hljs-comment">/* USER CODE END WHILE */</span><br><br>   <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br> &#125;<br> <span class="hljs-comment">/* USER CODE END 3 */</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3-轮询模式"><a href="#5-3-轮询模式" class="headerlink" title="5.3 轮询模式"></a>5.3 轮询模式</h3><p><strong>以上实验的收发方式称为轮询模式，这种模式效果不佳，会阻塞程序执行，因为 CPU 在一直查询数据并传入移位寄存器，直到完成发送或接收或者等待超时</strong>。</p>
+<p>该模式会使用到两对寄存器：</p>
+<ul>
+<li>发送数据寄存器（TDR）&amp; 发送移位寄存器（TX）</li>
+<li>接收数据寄存器（RDR） &amp; 接收移位寄存器（RD）</li>
+</ul>
+<h3 id="5-4-中断模式"><a href="#5-4-中断模式" class="headerlink" title="5.4 中断模式"></a>5.4 中断模式</h3><p>因为我们引入了中断串口模式，打开 USART2 的中断功能，随后使用中断串口函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UART_Transmit_IT(&amp;huart2, [pData], [size]);<br>HAL_UART_Receive_IT(&amp;huart2, [pData], [size]);<br></code></pre></td></tr></table></figure>
+
+<img src="/2024/02/29/post-8/post-8-6.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>在此模式中，不能把中断逻辑写在 <code>void USART2_IRQHandler(void)</code> 里，因为 所有USART 只有一个中断向量，需要重新定义以下回调函数（接收完成时才调用此函数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UART_RxCpltCallback</span><span class="hljs-params">(UART_HandleTypeDef *huart)</span><br>&#123;<br>    HAL_UART_Transmit_IT(&amp;huart2, dataReceived, <span class="hljs-number">2</span>);<br><br>    GPIO_PinState state = GPIO_PIN_SET;<br><br>    <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;0&#x27;</span>)<br>    &#123;<br>      state = GPIO_PIN_RESET;<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;R&#x27;</span>)<br>    &#123;<br>      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, state);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;G&#x27;</span>)<br>    &#123;<br>      HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, state);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dataReceived[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;B&#x27;</span>)<br>    &#123;<br>      HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, state);<br>    &#125;<br><br>    HAL_UART_Receive_IT(&amp;huart2, dataReceived, <span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另外接收不要放在 while 循环中执行，否则上一次没有接收完，又重复执行此函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UART_Receive_IT(&amp;huart2, dataReceived, <span class="hljs-number">2</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-5-DMA-模式"><a href="#5-5-DMA-模式" class="headerlink" title="5.5  DMA 模式"></a>5.5  DMA 模式</h3><p>对于中断模式，CPU 会被频繁打断去处理中断搬运数据（TDR -&gt; 发送移位寄存器）（ODR -&gt; 接受移位寄存器）。此时我们可以使用 DMA 来代替 CPU “搬运”数据，HAL 函数如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UART_Receive_DMA();<br>HAL_UART_Transimit_DMA();<br></code></pre></td></tr></table></figure>
+
+<p>如何接收不定长数据？利用串口空闲中断状态（IDLE），即串口完成一帧的数据包输入输出。HAL 函数如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UARTEx_ReceiveToIdle_DMA(); <br></code></pre></td></tr></table></figure>
+
+<h2 id="6-蓝牙"><a href="#6-蓝牙" class="headerlink" title="6. 蓝牙"></a>6. 蓝牙</h2><h3 id="6-1-原理"><a href="#6-1-原理" class="headerlink" title="6.1 原理"></a>6.1 原理</h3><p>蓝牙分为经典蓝牙和低功耗蓝牙（BLE）。蓝牙通讯分为 <code>主机</code> 和 <code>从机</code>。</p>
+<p>BT24 蓝牙串口透传模块：转化复杂的蓝牙协议为串口透传</p>
+<h3 id="6-2-实验"><a href="#6-2-实验" class="headerlink" title="6.2 实验"></a>6.2 实验</h3><p><strong>普通蓝牙通讯</strong></p>
+<ol>
+<li><p>使用杜邦线连接蓝牙模块到开发板</p>
+</li>
+<li><p>开启 <code>USART3</code> 并设置异步通信方式</p>
+</li>
+<li><p>更改波特率到 <code>9600</code>（蓝牙模块默认）</p>
+</li>
+<li><p>开启 接收与发送 <code>DMA</code> 通道</p>
+</li>
+<li><p>编写回调函数代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">uint8_t</span> data[<span class="hljs-number">50</span>]; <span class="hljs-comment">// 声明数据数组</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UARTEx_RxEventCallback</span><span class="hljs-params">(UART_HandleTypeDef *huart, <span class="hljs-type">uint16_t</span> Size)</span><br>&#123;<br>  <span class="hljs-keyword">if</span> (huart == &amp;huart3)<br>  &#123;<br>    HAL_UART_Transmit_DMA(&amp;huart3, data, Size); <span class="hljs-comment">// size 参数代表发送与接收相同的字节数</span><br>  &#125;<br>  <br>  HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart3, data, <span class="hljs-keyword">sizeof</span>(data));<br>  __HAL_DMA_DISABLE_IT(&amp;hdma_usart3_rx, DMA_IT_HT);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写第一次接收数据函数（接收不定长数据）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart3, data, <span class="hljs-keyword">sizeof</span>(data));<br>__HAL_DMA_DISABLE_IT(&amp;hdma_usart3_rx, DMA_IT_HT);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编译烧录后，使用串口助手验证</p>
+</li>
+</ol>
+<p><strong>蓝牙通讯控制LED灯</strong></p>
+<ol>
+<li><p>定义 <code>0xFF</code> 亮灯 <code>0x00</code> 灭灯</p>
+</li>
+<li><p><code>0x01</code> <code>0x02</code> <code>0x03</code> 分别代表红绿蓝灯</p>
+</li>
+<li><p>定义一帧数据数据包：<code>包头</code> <code>数据长度</code> <code>LED</code> <code>亮灭状态</code> <code>检验和</code></p>
+<blockquote>
+<p>校验位用于检验输出数据的正确与否，计算方式是将前面的数据依次相加，取最后一字节数据，接收后会进行对比，如果相同证明大概率没有出错。</p>
+</blockquote>
+</li>
+<li><p>开启三个 <code>LED</code> 灯的 <code>GPIO</code></p>
+</li>
+<li><p>编写回调函数代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UARTEx_RxEventCallback</span><span class="hljs-params">(UART_HandleTypeDef *huart, <span class="hljs-type">uint16_t</span> Size)</span><br>&#123;<br>  <span class="hljs-keyword">if</span>(huart == &amp;huart3)<br>  &#123;<br>    HAL_UART_Transmit_DMA(&amp;huart3, data, Size);<br><br>    <span class="hljs-keyword">if</span> (data[<span class="hljs-number">0</span>] == <span class="hljs-number">0xAA</span>)<br>    &#123;<br>      <span class="hljs-keyword">if</span> (data[<span class="hljs-number">1</span>] == Size)<br>      &#123;<br>        <span class="hljs-type">uint8_t</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; Size - <span class="hljs-number">1</span>; i++)<br>        &#123;<br>          sum += data[i];<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (sum == data[Size - <span class="hljs-number">1</span>])<br>        &#123;<br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; Size - <span class="hljs-number">1</span>; i+=<span class="hljs-number">2</span>)<br>          &#123;<br>            GPIO_PinState state = GPIO_PIN_SET;<br>            <span class="hljs-keyword">if</span> (data[i+<span class="hljs-number">1</span>] == <span class="hljs-number">0x00</span>)<br>            &#123;<br>              state = GPIO_PIN_RESET;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">0x01</span>)<br>            &#123;<br>              HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, state);<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">0x02</span>)<br>            &#123;<br>              HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, state);<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">0x03</span>)<br>            &#123;<br>              HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, state);<br>            &#125;<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br><br>    HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart3, data, <span class="hljs-keyword">sizeof</span>(data));<br>    __HAL_DMA_DISABLE_IT(&amp;hdma_usart3_rx, DMA_IT_HT);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写第一次接收数据函数（接收不定长数据）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart3, data, <span class="hljs-keyword">sizeof</span>(data));<br>__HAL_DMA_DISABLE_IT(&amp;hdma_usart3_rx, DMA_IT_HT);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="7-IIC"><a href="#7-IIC" class="headerlink" title="7. IIC"></a>7. IIC</h2><h3 id="7-1-原理"><a href="#7-1-原理" class="headerlink" title="7.1 原理"></a>7.1 原理</h3><p>SDA：Serial Data<br>SCL：Serial Clock</p>
+<p>SDA 线允许双向通信，但同一时刻只能有一个方向，是半双工模式。为了避免冲突，IIC 采用主从模式。这一特性可以与多设备进行通信。</p>
+<p>IIC 采用同步通信，主机通过时钟信号线发送固定频率的脉冲信号作为所有设备的统一时间源。</p>
+<h3 id="7-2-实验-AHT20-温湿度计（普通轮询模式）"><a href="#7-2-实验-AHT20-温湿度计（普通轮询模式）" class="headerlink" title="7.2 实验 - AHT20 温湿度计（普通轮询模式）"></a>7.2 实验 - AHT20 温湿度计（普通轮询模式）</h3><ol>
+<li><p>新建工程 CubeMX 开启 UART 串口 -用于读取返回数据</p>
+</li>
+<li><p>CubeMX 开启 I2C1</p>
+</li>
+<li><p>CubeMX 工程开启分别为外设添加头文件和源文件，然后单独新建 aht20.h 和 aht20.c</p>
+</li>
+<li><p>编写驱动头文件 aht20.h：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"> <span class="hljs-comment">/*</span><br><span class="hljs-comment"> * aht20.h</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *  Created on: Mar 23, 2024</span><br><span class="hljs-comment"> *      Author: iamcc</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> INC_AHT20_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INC_AHT20_H_</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;i2c.h&quot;</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">AHT20_Init</span><span class="hljs-params">()</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">AHT20_Read</span><span class="hljs-params">(<span class="hljs-type">float</span> *Temperature, <span class="hljs-type">float</span> *Humidity)</span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* INC_AHT20_H_ */</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写驱动源文件 aht20.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * aht20.c</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *  Created on: Mar 23, 2024</span><br><span class="hljs-comment"> *      Author: iamcc</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;aht20.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> AHT_20_ADDRESS 0x70</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">AHT20_Init</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">uint8_t</span> readBuffer;<br>    HAL_Delay(<span class="hljs-number">40</span>);<br>    HAL_I2C_Master_Receive(&amp;hi2c1, AHT_20_ADDRESS, &amp;readBuffer, <span class="hljs-number">1</span>, HAL_MAX_DELAY);<br><br>    <span class="hljs-keyword">if</span> ((readBuffer &amp; <span class="hljs-number">0x80</span>) == <span class="hljs-number">0x00</span>)<br>    &#123;<br>        <span class="hljs-type">uint8_t</span> sendBuffer[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">0xBE</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0x00</span>&#125;;<br>        HAL_I2C_Master_Transmit(&amp;hi2c1, AHT_20_ADDRESS, sendBuffer, <span class="hljs-number">3</span>, HAL_MAX_DELAY);<br>    &#125;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">AHT20_Read</span><span class="hljs-params">(<span class="hljs-type">float</span> *Temperature, <span class="hljs-type">float</span> *Humidity)</span><br>&#123;<br>    <span class="hljs-type">uint8_t</span> sendBuffer[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">0xAC</span>, <span class="hljs-number">0x33</span>, <span class="hljs-number">0x00</span>&#125;;<br>    <span class="hljs-type">uint8_t</span> readBuffer[<span class="hljs-number">6</span>];<br><br>    HAL_I2C_Master_Transmit(&amp;hi2c1, AHT_20_ADDRESS, sendBuffer, <span class="hljs-number">3</span>, HAL_MAX_DELAY);<br>    HAL_Delay(<span class="hljs-number">75</span>);<br>    HAL_I2C_Master_Receive(&amp;hi2c1, AHT_20_ADDRESS, readBuffer, <span class="hljs-number">6</span>, HAL_MAX_DELAY);<br><br>    <span class="hljs-keyword">if</span> ((readBuffer[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">0x80</span>) == <span class="hljs-number">0x00</span>)<br>    &#123;<br>        <span class="hljs-type">uint32_t</span> data = <span class="hljs-number">0</span>;<br>        data = ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">3</span>] &gt;&gt; <span class="hljs-number">4</span>) + ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-number">4</span>) + ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-number">12</span>);<br>        *Humidity = data * <span class="hljs-number">100.0f</span> / (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">20</span>);<br><br>        data = ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">3</span>] &amp; <span class="hljs-number">0x0F</span> &lt;&lt; <span class="hljs-number">16</span>) + ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-number">8</span>) + ((<span class="hljs-type">uint32_t</span>)readBuffer[<span class="hljs-number">5</span>]);<br>        *Temperature = data * <span class="hljs-number">200.0f</span> / (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>) - <span class="hljs-number">50</span>;<br>    &#125;   <br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写 main.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* Private includes ----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN Includes */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;aht20.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-comment">/* USER CODE END Includes */</span><br><br>  <span class="hljs-comment">/* Initialize all configured peripherals */</span><br>  MX_GPIO_Init();<br>  MX_I2C1_Init();<br>  MX_USART2_UART_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  AHT20_Init();<br>  <span class="hljs-type">float</span> temperature, humidity;<br>  <span class="hljs-type">char</span> message[<span class="hljs-number">50</span>];<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  &#123;<br>    AHT20_Read(&amp;temperature, &amp;humidity);<br>    <span class="hljs-built_in">sprintf</span>(message, <span class="hljs-string">&quot;Temp: %.1f °C\nHumi: %.1f %%\r\n&quot;</span>, temperature, humidity);<br>    HAL_UART_Transmit(&amp;huart2, (<span class="hljs-type">uint8_t</span>*)message, <span class="hljs-built_in">strlen</span>(message), HAL_MAX_DELAY); <br>    HAL_Delay(<span class="hljs-number">5000</span>);<br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br><br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  &#125;<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>连接串口后在串口助手观察读取的温湿度</p>
+</li>
+</ol>
+<h3 id="7-3-实验-AHT20-温湿度计（中断模式）"><a href="#7-3-实验-AHT20-温湿度计（中断模式）" class="headerlink" title="7.3 实验 - AHT20 温湿度计（中断模式）"></a>7.3 实验 - AHT20 温湿度计（中断模式）</h3><p>区别于普通轮询模式，中断模式要再开启 I2C 的中断向量 - <code>I2C event interrupt</code>，对应 I2C HAL 函数最后加上 IT 或者 DMA，与 UART 类似。</p>
+<h2 id="8-OLED"><a href="#8-OLED" class="headerlink" title="8. OLED"></a>8. OLED</h2><h3 id="8-1-原理"><a href="#8-1-原理" class="headerlink" title="8.1 原理"></a>8.1 原理</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/STM32/" class="print-no-link">#STM32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>STM32 HAL库开发学习笔记</div>
+      <div>https://imccchoi.github.io/2024/02/29/post-8/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ccchoi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/15/post-7/" title="嵌入式硬件基础与常用电子元器件原理">
+                        <span class="hidden-mobile">嵌入式硬件基础与常用电子元器件原理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"7Q1xJx2ndhLnhYKsA9238DE8-gzGzoHsz","appKey":"nJQ4gTqt8ER4RXQCeeP76SCB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

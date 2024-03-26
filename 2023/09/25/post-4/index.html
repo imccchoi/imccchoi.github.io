@@ -16,24 +16,24 @@
   <meta name="author" content="ccchoi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本文介绍 C 语言数据存储的详细内容。  1. 数据类型1.1 类型的基本归类C语言中有多种基本数据类型，包括整数、浮点数、字符等。这些数据类型在内存中占用的空间大小不同，例如，int通常占用4个字节，float占用4个字节，char占用1个字节。数据类型决定了数据在内存中的存储方式和表示形式，可以分为以下的五大类型： 1.1.1 整型123456789101112char	unsigned c">
+    <meta name="description" content="我们都知道，C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。同是正是因为 C 语言可以使用指针，从而对物理内存地址进行直接操作，这是 C 的最大特点之一。要理解好 C 语言，也需要对数据在内存中存储方式有基本的认识，本文以 C 为例子，介绍数据在内存中存储的基本原理。  内存空间与地址下图展示了一个计算机内存条，其中每个黑色方块都包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C 语言数据存储基础">
+<meta property="og:title" content="C 语言数据在内存中的存储基本原理">
 <meta property="og:url" content="https://imccchoi.github.io/2023/09/25/post-4/index.html">
 <meta property="og:site_name" content="ccchoi&#39;s blog">
-<meta property="og:description" content="本文介绍 C 语言数据存储的详细内容。  1. 数据类型1.1 类型的基本归类C语言中有多种基本数据类型，包括整数、浮点数、字符等。这些数据类型在内存中占用的空间大小不同，例如，int通常占用4个字节，float占用4个字节，char占用1个字节。数据类型决定了数据在内存中的存储方式和表示形式，可以分为以下的五大类型： 1.1.1 整型123456789101112char	unsigned c">
+<meta property="og:description" content="我们都知道，C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。同是正是因为 C 语言可以使用指针，从而对物理内存地址进行直接操作，这是 C 的最大特点之一。要理解好 C 语言，也需要对数据在内存中存储方式有基本的认识，本文以 C 为例子，介绍数据在内存中存储的基本原理。  内存空间与地址下图展示了一个计算机内存条，其中每个黑色方块都包">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imccchoi.github.io/img/post-4.png">
 <meta property="article:published_time" content="2023-09-25T13:55:00.000Z">
-<meta property="article:modified_time" content="2024-02-06T13:30:07.571Z">
+<meta property="article:modified_time" content="2024-02-19T14:59:03.951Z">
 <meta property="article:author" content="ccchoi">
-<meta property="article:tag" content="数据存储png">
+<meta property="article:tag" content="数据存储">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://imccchoi.github.io/img/post-4.png">
   
   
   
-  <title>C 语言数据存储基础 - ccchoi&#39;s blog</title>
+  <title>C 语言数据在内存中的存储基本原理 - ccchoi&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C 语言数据存储基础"></span>
+            <span id="subtitle" data-typed-text="C 语言数据在内存中的存储基本原理"></span>
           
         </div>
 
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.9k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          9 分钟
+          17 分钟
         
       </span>
     
@@ -293,31 +293,36 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">C 语言数据存储基础</h1>
+            <h1 id="seo-header">C 语言数据在内存中的存储基本原理</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>本文介绍 C 语言数据存储的详细内容。</p>
+<p><strong>我们都知道，C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。同是正是因为 C 语言可以使用指针，从而对物理内存地址进行直接操作，这是 C 的最大特点之一。要理解好 C 语言，也需要对数据在内存中存储方式有基本的认识，本文以 C 为例子，介绍数据在内存中存储的基本原理。</strong></p>
 </blockquote>
-<h2 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h2><h3 id="1-1-类型的基本归类"><a href="#1-1-类型的基本归类" class="headerlink" title="1.1 类型的基本归类"></a>1.1 类型的基本归类</h3><p>C语言中有多种基本数据类型，包括整数、浮点数、字符等。这些数据类型在内存中占用的空间大小不同，例如，int通常占用4个字节，float占用4个字节，char占用1个字节。数据类型决定了数据在内存中的存储方式和表示形式，可以分为以下的五大类型：</p>
+<h2 id="内存空间与地址"><a href="#内存空间与地址" class="headerlink" title="内存空间与地址"></a>内存空间与地址</h2><p>下图展示了一个计算机内存条，其中每个黑色方块都包含一块内存空间。我们可以将内存想象成一个巨大的 Excel 表格，其中每个单元格都可以存储一定大小的数据。系统通过内存地址来访问目标位置的数据。计算机根据特定规则为表格中的每个单元格分配编号，确保每个内存空间都有唯一的内存地址。有了这些地址，程序便可以访问内存中的数据。</p>
+<p><strong>最重要的概念：基本数据类型以二进制的形式存储在计算机中。一个二进制位即为 1 比特。在绝大多数现代操作系统中，1字节（byte）由 8 比特（bit）组成。</strong></p>
+<img src="/2023/09/25/post-4/post-4-1.png" srcset="/img/loading.gif" lazyload class="">
+
+
+<h2 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h2><h3 id="1-1-类型的基本归类"><a href="#1-1-类型的基本归类" class="headerlink" title="1.1 类型的基本归类"></a>1.1 类型的基本归类</h3><p>当谈及计算机中的数据时，我们会想到文本、图片、视频、语音、3D 模型等各种形式。尽管这些数据的组织形式各异，但它们都由各种基本数据类型构成。</p>
+<p>C语言中有多种基本数据类型，包括整数、浮点数、字符等。这些数据类型在内存中占用的空间大小不同，例如，int通常占用4个字节，float占用4个字节，char占用1个字节。数据类型决定了数据在内存中的存储方式和表示形式，可以分为以下的五大类型：</p>
 <h3 id="1-1-1-整型"><a href="#1-1-1-整型" class="headerlink" title="1.1.1 整型"></a>1.1.1 整型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span><br>	<span class="hljs-type">signed</span> <span class="hljs-type">char</span><br><span class="hljs-type">short</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">short</span> [<span class="hljs-type">int</span>]<br>	<span class="hljs-type">signed</span> <span class="hljs-type">short</span> [<span class="hljs-type">int</span>]<br><span class="hljs-type">int</span> <br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span><br>	<span class="hljs-type">signed</span> <span class="hljs-type">int</span><br><span class="hljs-type">long</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span><br>	<span class="hljs-type">signed</span> <span class="hljs-type">long</span> [<span class="hljs-type">int</span>]<br></code></pre></td></tr></table></figure>
 
 <h3 id="1-1-2-浮点型"><a href="#1-1-2-浮点型" class="headerlink" title="1.1.2 浮点型"></a>1.1.2 浮点型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">float</span><br><span class="hljs-type">double</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="1-1-3-构造类型"><a href="#1-1-3-构造类型" class="headerlink" title="1.1.3 构造类型"></a>1.1.3 构造类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">array</span> <span class="hljs-comment">// 数组类型</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> // 结构体类型 </span><br><span class="hljs-class"><span class="hljs-title">enum</span> // 枚举类型 </span><br><span class="hljs-class"><span class="hljs-title">union</span> // 联合类型</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="1-1-4-指针类型"><a href="#1-1-4-指针类型" class="headerlink" title="1.1.4 指针类型"></a>1.1.4 指针类型</h3><figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nim"><span class="hljs-type">int</span> *<span class="hljs-keyword">ptr</span><br><span class="hljs-type">char</span> *<span class="hljs-keyword">ptr</span><br><span class="hljs-type">float</span> *<span class="hljs-keyword">ptr</span><br><span class="hljs-type">void</span> *<span class="hljs-keyword">ptr</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-1-4-指针类型"><a href="#1-1-4-指针类型" class="headerlink" title="1.1.4 指针类型"></a>1.1.4 指针类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> *ptr<br><span class="hljs-type">char</span> *ptr<br><span class="hljs-type">float</span> *ptr<br><span class="hljs-type">void</span> *ptr<br></code></pre></td></tr></table></figure>
 
-<h3 id="1-1-5-空类型"><a href="#1-1-5-空类型" class="headerlink" title="1.1.5 空类型"></a>1.1.5 空类型</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">void</span> <span class="hljs-comment">// 函数参数、返回类型、指针</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-1-5-空类型"><a href="#1-1-5-空类型" class="headerlink" title="1.1.5 空类型"></a>1.1.5 空类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-comment">// 函数参数、返回类型、指针</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="2-整形在内存中的存储"><a href="#2-整形在内存中的存储" class="headerlink" title="2. 整形在内存中的存储"></a>2. 整形在内存中的存储</h2><p>C 变量的创建是根据数据类型在内存中开辟空间。</p>
 <h3 id="2-1-原码、反码、补码"><a href="#2-1-原码、反码、补码" class="headerlink" title="2.1 原码、反码、补码"></a>2.1 原码、反码、补码</h3><p>数据在内存中以 2 进制的形式存储，以整数举例，其 2 进制存储有三种表示形式。</p>
-<p>正整数：原码、反码、补码相同。</p>
-<p>负整数：原码、反码、补码要进行计算。</p>
+<p><strong>正整数：原码、反码、补码相同。</strong><br><strong>负整数：原码、反码、补码要进行计算。</strong></p>
 <p>举例代码：</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dns">int a = -<span class="hljs-number">10</span><span class="hljs-comment">;</span><br>// <span class="hljs-number">10000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00001010</span> - 原码（原始 <span class="hljs-number">2</span> 进制表示形式）<br>// <span class="hljs-number">11111111</span> <span class="hljs-number">11111111</span> <span class="hljs-number">11111111</span> <span class="hljs-number">11110101</span> - 反码（符号位不变，其它位按位取反）<br>// <span class="hljs-number">11111111</span> <span class="hljs-number">11111111</span> <span class="hljs-number">11111111</span> <span class="hljs-number">11110110</span> - 补码（反码 + <span class="hljs-number">1</span>）<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> a = <span class="hljs-number">-10</span>;<br><span class="hljs-comment">// 10000000 00000000 00000000 00001010 - 原码（原始 2 进制表示形式）</span><br><span class="hljs-comment">// 11111111 11111111 11111111 11110101 - 反码（符号位不变，其它位按位取反）</span><br><span class="hljs-comment">// 11111111 11111111 11111111 11110110 - 补码（反码 + 1）</span><br></code></pre></td></tr></table></figure>
 
 <p>VS Code 调试取 <code>&amp;a</code> 的地址后可以观察发现 16 进制的内存地址所存储的数据为 <code>F6 FF FF FF</code>，这恰好是 2 进制补码的 16 进制数，同时表明了整数在内存中存储的是补码。</p>
 <img src="/2023/09/25/post-4/1.png" srcset="/img/loading.gif" lazyload class="">
@@ -329,6 +334,11 @@
 <blockquote>
 <p>为什么数据在内存中存放的是补码：因为在计算机组成原理中，补码可以将符号位和数值域统一处理，加法和减法也可以统一处理（CPU只有加法器），此外补码和原码相互转换，运算过程是相同的，无需额外的逻辑硬件电路。</p>
 </blockquote>
+<ul>
+<li>更深入的解释是原码虽然最直观，但存在一些局限性。一方面，负数的原码不能直接用于运算。例如在原码下计算 1 + (−2)，得到的结果是 −3，这显然是不对的。为了解决此问题，计算机引入了反码。如果我们先将原码转换为反码，并在反码下计算 1 + (−2)，最后将结果从反码转换回原码，则可得到正确结果 −1。</li>
+<li>另一方面，数字零的原码有 +0 和 −0 两种表示方式。这意味着数字零对应两个不同的二进制编码，这可能会带来歧义。比如在条件判断中，如果没有区分正零和负零，则可能会导致判断结果出错。而如果我们想处理正零和负零歧义，则需要引入额外的判断操作，这可能会降低计算机的运算效率。</li>
+<li>后面，计算机进一步引入了补码，在负零的反码基础上加 1 会产生进位，但 byte 类型的长度只有 8 位，因此溢出到第 9 位的 1 会被舍弃。也就是说，负零的补码为 0000 0000 ，与正零的补码相同。这意味着在补码表示中只存在一个零，正负零歧义从而得到解决。</li>
+</ul>
 <p>举例代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-comment">// 1 - 1;</span><br>	<span class="hljs-comment">// 1 + (-1);</span><br>	<span class="hljs-comment">// 00000000 00000000 00000000 00000001 - 1的原码</span><br>	<span class="hljs-comment">// 10000000 00000000 00000000 00000001 - -1的原码</span><br>    <span class="hljs-comment">// 如果计算机采用原码进行逻辑加减（1+（-1）），得到结果数值如下</span><br>    <span class="hljs-comment">// 10000000 00000000 00000000 00000010 - 是-2？可以看到数值是错误的。</span><br>	<span class="hljs-comment">// 如果采用补码运算，数值才是正确的，这是计算机组成底层原理的逻辑。</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -348,9 +358,10 @@
 <li>小端字节序的表示方式与计算机内部的数据存储方式相符，因此在许多计算机架构中使用较为广泛。</li>
 </ul>
 <p>例如，十六进制数0x12345678在小端字节序中存储为：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-number">0x78</span> <span class="hljs-number">0x56</span> <span class="hljs-number">0x34</span> <span class="hljs-number">0x12</span><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">0x78</span> <span class="hljs-number">0x56</span> <span class="hljs-number">0x34</span> <span class="hljs-number">0x12</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 <p>字节序的选择在不同计算机架构和操作系统中可以有所不同。例如，x86 和 x86-64 架构通常使用小端字节序，而某些大型服务器架构（如SPARC）使用大端字节序。这种差异可能会在数据交换和网络通信中引起问题，因此在跨平台应用程序中，需要特别注意字节序的处理，以确保数据正确解释和传递。通常使用一种标准的字节序协议（如网络字节序）来协调不同架构之间的数据交换。</p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><p><strong>以上就是数据存储的基本原理，C 语言根据数据的类型在内存中开辟空间，操作系统根据内存地址来进行读取操作。整数在计算机中是以补码的形式存储的。在补码表示下，计算机可以对正数和负数的加法一视同仁，不需要为减法操作单独设计特殊的硬件电路，并且不存在正负零歧义的问题。如果深入，还有数据结构、内存管理、浮点数、字符编码等等方向可以探讨，从这里也可以窥探到计算机组成原理和它的体系实在是精妙。</strong></p>
 
                 
               </div>
@@ -363,7 +374,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8png/" class="print-no-link">#数据存储png</a>
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" class="print-no-link">#数据存储</a>
       
     </div>
   
@@ -375,7 +386,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C 语言数据存储基础</div>
+      <div>C 语言数据在内存中的存储基本原理</div>
       <div>https://imccchoi.github.io/2023/09/25/post-4/</div>
     </div>
     <div class="license-meta">
@@ -420,9 +431,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/26/post-5/" title="嵌入式技能学习进度与教程清单 [2023/11/26 更新]">
+                      <a href="/2023/11/26/post-5/" title="计算机/嵌入式/编程等书籍与教程汇总 [2024/02/08 更新]">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">嵌入式技能学习进度与教程清单 [2023/11/26 更新]</span>
+                        <span class="hidden-mobile">计算机/嵌入式/编程等书籍与教程汇总 [2024/02/08 更新]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -430,8 +441,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/23/post-3/" title="Visual Studio Code 中配置 C/C++ 运行环境">
-                        <span class="hidden-mobile">Visual Studio Code 中配置 C/C++ 运行环境</span>
+                      <a href="/2023/04/23/post-3/" title="Visual Studio Code 中配置 C/C++ 环境">
+                        <span class="hidden-mobile">Visual Studio Code 中配置 C/C++ 环境</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

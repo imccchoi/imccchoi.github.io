@@ -16,16 +16,16 @@
   <meta name="author" content="ccchoi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VS Code 作为一款轻量级的代码编辑器，在我学习前端的时候就已经爱不释手，可以说是程序员人手必备的编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 的编译环境，以下将介绍大致的方法。  1. MinGW 编译器安装 MinGW（Minimalist GNU for Windows）是一个用于 W">
+    <meta name="description" content="VS Code 作为微软的一款轻量级的代码编辑器，在我先前学习前端的时候就已经爱不释手，加上开源免费，丰富的插件生态特性，可以说是必备的代码编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 环境，以下将介绍大致的方法。  1. MinGW 安装MinGW（Minimalist GNU for Win">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Visual Studio Code 中配置 C&#x2F;C++ 运行环境">
+<meta property="og:title" content="Visual Studio Code 中配置 C&#x2F;C++ 环境">
 <meta property="og:url" content="https://imccchoi.github.io/2023/04/23/post-3/index.html">
 <meta property="og:site_name" content="ccchoi&#39;s blog">
-<meta property="og:description" content="VS Code 作为一款轻量级的代码编辑器，在我学习前端的时候就已经爱不释手，可以说是程序员人手必备的编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 的编译环境，以下将介绍大致的方法。  1. MinGW 编译器安装 MinGW（Minimalist GNU for Windows）是一个用于 W">
+<meta property="og:description" content="VS Code 作为微软的一款轻量级的代码编辑器，在我先前学习前端的时候就已经爱不释手，加上开源免费，丰富的插件生态特性，可以说是必备的代码编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 环境，以下将介绍大致的方法。  1. MinGW 安装MinGW（Minimalist GNU for Win">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imccchoi.github.io/img/post-3.jpg">
 <meta property="article:published_time" content="2023-04-23T12:57:42.000Z">
-<meta property="article:modified_time" content="2024-02-06T13:30:07.561Z">
+<meta property="article:modified_time" content="2024-02-19T14:59:03.888Z">
 <meta property="article:author" content="ccchoi">
 <meta property="article:tag" content="C&#x2F;C++环境">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
   
   
   
-  <title>Visual Studio Code 中配置 C/C++ 运行环境 - ccchoi&#39;s blog</title>
+  <title>Visual Studio Code 中配置 C/C++ 环境 - ccchoi&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Visual Studio Code 中配置 C/C++ 运行环境"></span>
+            <span id="subtitle" data-typed-text="Visual Studio Code 中配置 C/C++ 环境"></span>
           
         </div>
 
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          814 字
+          821 字
         
       </span>
     
@@ -293,83 +293,62 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Visual Studio Code 中配置 C/C++ 运行环境</h1>
+            <h1 id="seo-header">Visual Studio Code 中配置 C/C++ 环境</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>VS Code 作为一款轻量级的代码编辑器，在我学习前端的时候就已经爱不释手，可以说是程序员人手必备的编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 的编译环境，以下将介绍大致的方法。</p>
+<p><strong>VS Code 作为微软的一款轻量级的代码编辑器，在我先前学习前端的时候就已经爱不释手，加上开源免费，丰富的插件生态特性，可以说是必备的代码编辑器。但在学习 C 的阶段，由于觉得 Visual Studio 2022 比较臃肿，所以便对想在 VS Code 中配置 C&#x2F;C++ 环境，以下将介绍大致的方法。</strong></p>
 </blockquote>
-<h2 id="1-MinGW-编译器安装"><a href="#1-MinGW-编译器安装" class="headerlink" title="1. MinGW 编译器安装"></a>1. MinGW 编译器安装</h2><blockquote>
-<p>MinGW（Minimalist GNU for Windows）是一个用于 Windows 平台的开发工具集，它允许开发者在 Windows 操作系统上使用 GNU 工具集来编译和构建软件，包括 C、C++ 和其他编程语言。MinGW 的目标是提供一个轻量级、开源的开发环境，使开发者能够在 Windows 上进行跨平台的开发。</p>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/">Sourgeforce</a></p>
-</blockquote>
+<h2 id="1-MinGW-安装"><a href="#1-MinGW-安装" class="headerlink" title="1. MinGW 安装"></a>1. MinGW 安装</h2><p>MinGW（Minimalist GNU for Windows）是一个用于 Windows 平台的开发工具集，它允许开发者在 Windows 操作系统上使用 GNU 工具集来编译和构建软件，包括 C、C++ 和其他编程语言。MinGW 的目标是提供一个轻量级、开源的开发环境，使开发者能够在 Windows 上进行跨平台的开发。</p>
 <blockquote>
-<p>第二种方法可以通过 VS Code 官方教程中提到的 MSYS2 来安装，下面还是继续介绍比较多人选择的方式。</p>
-<p>参考：（<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/cpp/config-mingw">Get Started with C++ and MinGW-w64 in Visual Studio Code</a>）</p>
+<p>✅ VS Code 官方推荐通过 MSYS2 来安装 MinGW，详细请参阅：“<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/cpp/config-mingw">Using GCC with MinGW</a>”。</p>
+<p>❔ MSYS2 是针对 Windows 的软件分发和构建平台。它提供了一个类 Unix 的环境，一个命令行界面和一个软件库，使得在 Windows 上安装、使用、构建和移植软件更加容易。</p>
+<p>🧲 <a target="_blank" rel="noopener" href="https://www.msys2.org/">下载链接</a></p>
 </blockquote>
+<ul>
+<li><p>安装完成后运行 <code>MSYS2</code> 终端（默认 <code>UCRT64</code>），其采用 <code>pacman</code> 软件包管理器，按步骤执行以下代码：</p>
+</li>
+<li><p>设置清华大学软件源 URL：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sed -i &quot;s#https\?://mirror.msys2.org/#https://mirrors.tuna.tsinghua.edu.cn/msys2/#g&quot; /etc/pacman.d/mirrorlist*<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 MSYS2 所有软件包</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -Suy<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 MinGW-w64 toolchain</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>打印版本，检查是否成功安装</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">gcc --version<br>g++ --version<br>gdb --version<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-VS-Code-配置"><a href="#2-VS-Code-配置" class="headerlink" title="2. VS Code 配置"></a>2. VS Code 配置</h2><h3 id="2-1-安装插件"><a href="#2-1-安装插件" class="headerlink" title="2.1 安装插件"></a>2.1 安装插件</h3><p>VS Code 基本安装和设置中文语言这里不展开说明，首先在 VS Code 扩展商店中搜索并下载 C&#x2F;C++ 插件安装。</p>
+<img src="/2023/04/23/post-3/post-3-1.png" srcset="/img/loading.gif" lazyload class="">
+<br/>
 <br/>
 
-<p>进入地址后找到并选择 GCC-8.1.0 中的 <code>x86_64-win32-seh</code> 下载：</p>
-<img src="/2023/04/23/post-3/1.png" srcset="/img/loading.gif" lazyload class="">
+<p>接下来任意编写一个 <code>test.c</code> 并输入简单的 C 代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> <br>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, World!\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h3 id="2-2-配置-gcc-路径"><a href="#2-2-配置-gcc-路径" class="headerlink" title="2.2 配置 gcc 路径"></a>2.2 配置 gcc 路径</h3><p>键盘快捷键 <code>Ctrl + Shif + P</code> 呼出菜单选择 <code>C/C++:编辑配置(UI)</code>，如红框所示选择自己对应 MinGW <code>bin</code> 路径中的 <code>gcc.exe</code> 作为编译器。</p>
+<img src="/2023/04/23/post-3/post-3-2.png" srcset="/img/loading.gif" lazyload class="">
 <br/>
 
-<br/>
+<h3 id="2-3-设置智能代码提示"><a href="#2-3-设置智能代码提示" class="headerlink" title="2.3 设置智能代码提示"></a>2.3 设置智能代码提示</h3><p>同样在呼出菜单中选择 <code>C/C++:选择 IntelliSense 配置</code>，再选择 MinGW <code>bin</code> 路径中的 <code>gcc.exe</code> 即可。</p>
+<img src="/2023/04/23/post-3/post-3-3.png" srcset="/img/loading.gif" lazyload class="">
 
-<p>下载完成解压到系统非中文路径，解压后的结构如下：</p>
-<img src="/2023/04/23/post-3/2.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="3-编译任务配置"><a href="#3-编译任务配置" class="headerlink" title="3. 编译任务配置"></a>3. 编译任务配置</h2><p>通过菜单栏或快捷键 <code>Ctrl + Shif + B</code> 运行生成任务，它会在根目录 <code>.vscode</code> 文件夹下生成 <code>tasks.json</code> 文件。这里我们要特别注意的是 <code>&quot;-g&quot;</code> 和  <code>&quot;-o&quot;</code> 这两项的参数。VS Code 变量参数官方文档：”<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/variables-reference">Visual Studio Code Variables Reference</a>“。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppbuild&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C/C++: gcc.exe 生成活动文件&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\msys64\\mingw64\\bin\\gcc.exe&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;-fdiagnostics-color=always&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;-g&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-comment">//&quot;$&#123;file&#125;&quot;,</span><br>                <span class="hljs-string">&quot;$&#123;fileDirname&#125;\\*.c&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// &quot;*.c&quot; 代表编译该源文件所属目录下的全部源文件，单个文件可以更改回上一行的参数。</span><br>                <span class="hljs-string">&quot;-o&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;$&#123;fileDirname&#125;\\output.exe&quot;</span> <span class="hljs-comment">// 生成可执行程序的名称统一命名为 &quot;output.exe&quot;。</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;$gcc&quot;</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;detail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调试器生成的任务。&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<br/>
-
-<br/>
-
-<p>接着编辑环境变量 <code>Path</code>，添加 <code>bin</code> 路径：</p>
-<img src="/2023/04/23/post-3/3.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="2-VS-Code-插件配置"><a href="#2-VS-Code-插件配置" class="headerlink" title="2. VS Code 插件配置"></a>2. VS Code 插件配置</h2><p>在 VS Code 扩展商店中搜索并下载 C&#x2F;C++ 插件安装：</p>
-<img src="/2023/04/23/post-3/4.png" srcset="/img/loading.gif" lazyload class="">
-
-<br/>
-
-<br/>
-
-<p>接下来新建任意文件夹，编写一个 <code>test.c</code> 并输入简单的 C 代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> <br>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, World!\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>然后键盘操作 <code>Ctrl + Shif + P</code> 呼出菜单选择 <code>C/C++:编辑配置(UI)</code>，如红框所示选择 MinGW 的 <code>bin</code> 路径中的 <code>gcc.exe</code> 作为编译器，同时智能代码提示 <code>IntelliSense</code> 模式选择 <code>gcc-x64 (legacy)</code>：</p>
-<img src="/2023/04/23/post-3/7.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="3-编译任务配置生成"><a href="#3-编译任务配置生成" class="headerlink" title="3. 编译任务配置生成"></a>3. 编译任务配置生成</h2><p>上述 C 代码编写完成后，通过菜单栏或快捷键 <code>Ctrl + Shif + B</code> 运行生成任务：</p>
-<img src="/2023/04/23/post-3/8.png" srcset="/img/loading.gif" lazyload class="">
-
-<br/>
-
-<br/>
-
-<p>此时会生成一个 <code>tasks.json</code> 文件：</p>
-<img src="/2023/04/23/post-3/9.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="4-可执行程序运行"><a href="#4-可执行程序运行" class="headerlink" title="4. 可执行程序运行"></a>4. 可执行程序运行</h2><p>编译任务完成后，会发现工作目录生成了 <code>[filename].exe</code> 可执行程序，在终端输入 <code>./[filename].exe</code> 即可以执行程序并输出结果。（我这里编辑了一些设置，所以生成路径不一样。）</p>
-<blockquote>
-<p>一般很多人都喜欢用 Windows 的黑框命令提示符，但是其实在 VS Code 中自带的终端是可以解决诸如程序运行一闪而过的问题，可以省去一些额外的配置。</p>
-</blockquote>
-<img src="/2023/04/23/post-3/10.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="5-中文问题解决"><a href="#5-中文问题解决" class="headerlink" title="5. 中文问题解决"></a>5. 中文问题解决</h2><p>在中文环境下，中文字符和文件名都可能会造成乱码和编译错误的问题，解决办法如果</p>
-<img src="/2023/04/23/post-3/6.png" srcset="/img/loading.gif" lazyload class="">
-
-<p>在 <code>task.json</code> 第 13 行添加以下代码，不要忘记上一行最后有一个 <code>,</code> 逗号。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;-fexec-charset=GBK&quot;</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="6-设置-tasks-json-文件"><a href="#6-设置-tasks-json-文件" class="headerlink" title="6. 设置 tasks.json 文件"></a>6. 设置 tasks.json 文件</h2><p>如果想要输出的可执行文件更加简洁统一，可以按照以下设置：</p>
-<p>在第 12 行中按如下格式可以将编译后的exe文件统一保存到executable files这个文件夹中，具体可以自定义，这样就可以统一整理exe文件，默认是保存在根目录。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;\\executable files\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>其实这里涉及到了生成 &amp; 编译路径的一些配置和同时编译多文件这些问题，这里不详细展开，具体需要参考官方文档。参考：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/variables-reference">Visual Studio Code Variables Reference</a></p>
-</blockquote>
+<h2 id="4-可执行程序运行"><a href="#4-可执行程序运行" class="headerlink" title="4. 可执行程序运行"></a>4. 可执行程序运行</h2><p>编译完成后，在命令行终端输入 <code>./文件路径/文件名&quot;</code> 运行生成的程序。</p>
 
                 
               </div>
@@ -394,7 +373,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Visual Studio Code 中配置 C/C++ 运行环境</div>
+      <div>Visual Studio Code 中配置 C/C++ 环境</div>
       <div>https://imccchoi.github.io/2023/04/23/post-3/</div>
     </div>
     <div class="license-meta">
@@ -439,9 +418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/25/post-4/" title="C 语言数据存储基础">
+                      <a href="/2023/09/25/post-4/" title="C 语言数据在内存中的存储基本原理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C 语言数据存储基础</span>
+                        <span class="hidden-mobile">C 语言数据在内存中的存储基本原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

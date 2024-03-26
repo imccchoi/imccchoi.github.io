@@ -16,16 +16,16 @@
   <meta name="author" content="ccchoi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。  VMware Ubuntu 虚拟机系统安装与配置 安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（这里采用 22.04">
+    <meta name="description" content="对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。  VMware Ubuntu 虚拟机系统安装与配置安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（ 本文使用 22.04">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嵌入式 Linux 开发环境初步搭建">
 <meta property="og:url" content="https://imccchoi.github.io/2023/12/13/post-6/index.html">
 <meta property="og:site_name" content="ccchoi&#39;s blog">
-<meta property="og:description" content="对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。  VMware Ubuntu 虚拟机系统安装与配置 安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（这里采用 22.04">
+<meta property="og:description" content="对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。  VMware Ubuntu 虚拟机系统安装与配置安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（ 本文使用 22.04">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imccchoi.github.io/img/post-6.png">
 <meta property="article:published_time" content="2023-12-13T15:13:01.000Z">
-<meta property="article:modified_time" content="2024-02-06T13:30:07.571Z">
+<meta property="article:modified_time" content="2024-03-05T14:10:14.756Z">
 <meta property="article:author" content="ccchoi">
 <meta property="article:tag" content="环境搭建">
 <meta name="twitter:card" content="summary_large_image">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          733 字
+          838 字
         
       </span>
     
@@ -299,12 +299,32 @@
               <div class="markdown-body">
                 
                 <blockquote>
-<p>对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。</p>
+<p><strong>对于嵌入式 Linux 开发，第一步的难题就是搭建起一个方便易用的开发环境，说着是易用，配置的过程也是较为繁琐，Linux 相比 Windows 之下就是一匹需要驯服的野马。所以本文汇总我使用 iMX6ULL 开发板搭建开发环境的方法和步骤。</strong></p>
 </blockquote>
-<h2 id="VMware-Ubuntu-虚拟机系统安装与配置"><a href="#VMware-Ubuntu-虚拟机系统安装与配置" class="headerlink" title="VMware Ubuntu 虚拟机系统安装与配置"></a>VMware Ubuntu 虚拟机系统安装与配置</h2><ol>
-<li>安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（这里采用 22.04 LTS 发行版）。</li>
-<li>更换 apt sources.list 软件源（阿里源、清华源等）以改善软件包管理网络访问质量和速度。</li>
-</ol>
+<h2 id="VMware-Ubuntu-虚拟机系统安装与配置"><a href="#VMware-Ubuntu-虚拟机系统安装与配置" class="headerlink" title="VMware Ubuntu 虚拟机系统安装与配置"></a>VMware Ubuntu 虚拟机系统安装与配置</h2><p>安装 VMware Workstation 和 下载准备 Ubuntu 系统镜像（ 本文使用 22.04 LTS 发行版 ）。</p>
+<ul>
+<li><p>VMware Workstation Pro 需要付费软件，本文不讨论详细的获取方法。VMware Workstation Player 是免费版本。</p>
+</li>
+<li><p>Ubuntu镜像官网下载 -&gt; <a target="_blank" rel="noopener" href="https://ubuntu.com/download/desktop">Download Ubuntu</a></p>
+</li>
+<li><p>VMware Workstation Pro 安装 Ubuntu 过程也不作详细说明，Web 上的教程大同小异。</p>
+</li>
+<li><p>Ubuntu 使用 apt 软件管理器，按照以下步骤更换 apt sources.list 软件源（阿里源、清华源等）以改善软件包管理网络访问质量和速度：</p>
+<ul>
+<li>备份源文件</li>
+</ul>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo cp /etc/apt/source.list /etc/apt/source.list.bak<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 Vim 替换<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">清华镜像站</a>提供的配置</li>
+</ul>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo vim /etc/apt/source.list<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>刷新数据源</li>
+</ul>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt update<br></code></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>除了VMware 和 Ubuntu.</p>
 <p>在Windows下 我们还需要</p>
 <h2 id="开发环境概要"><a href="#开发环境概要" class="headerlink" title="开发环境概要"></a>开发环境概要</h2><ol>
@@ -316,9 +336,7 @@
 <ol>
 <li><p>我住所大致的网络拓扑如图所示。（主路由的LAN口连接到二级路由器LAN口并开启中转桥接模式，充当交换机，二级路由在书桌旁边，这样也方便有线连接开发板。）</p>
 <img src="/2023/12/13/post-6/1.png" srcset="/img/loading.gif" lazyload class="">
-
 <br/>
-
 <br/>
 </li>
 <li><p>Windows：直接连接二级路由器，一般我们就是这样访问互联网，这个不作太多说明。</p>
@@ -400,12 +418,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/02/15/post-7/" title="嵌入式硬件基础与常用电子元器件原理">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">嵌入式硬件基础与常用电子元器件原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/26/post-5/" title="嵌入式技能学习进度与教程清单 [2023/11/26 更新]">
-                        <span class="hidden-mobile">嵌入式技能学习进度与教程清单 [2023/11/26 更新]</span>
+                      <a href="/2023/11/26/post-5/" title="计算机/嵌入式/编程等书籍与教程汇总 [2024/02/08 更新]">
+                        <span class="hidden-mobile">计算机/嵌入式/编程等书籍与教程汇总 [2024/02/08 更新]</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

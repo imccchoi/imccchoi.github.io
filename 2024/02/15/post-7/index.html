@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ccchoi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="模拟电子和数字电路是作为硬件知识的根基，本文将整理嵌入式开发需要了解的硬件基础知识和常用电子元器件的学习笔记，本篇笔记肯定不能完全涵盖模电与数电的全部内容，目标是对嵌入式开发有入门的硬件认知，有时间会计划深入完整学习更多，满足嵌入式软件开发所需要掌握硬件知识的要求即可。  1. 电路基础1.1 欧姆定律从最基础开始，欧姆定律揭示了电路中电压、电流和电阻三者之间的关系，即电压等于电流和电阻的乘积。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式硬件基础与常用电子元器件原理">
+<meta property="og:url" content="https://imccchoi.github.io/2024/02/15/post-7/index.html">
+<meta property="og:site_name" content="ccchoi&#39;s blog">
+<meta property="og:description" content="模拟电子和数字电路是作为硬件知识的根基，本文将整理嵌入式开发需要了解的硬件基础知识和常用电子元器件的学习笔记，本篇笔记肯定不能完全涵盖模电与数电的全部内容，目标是对嵌入式开发有入门的硬件认知，有时间会计划深入完整学习更多，满足嵌入式软件开发所需要掌握硬件知识的要求即可。  1. 电路基础1.1 欧姆定律从最基础开始，欧姆定律揭示了电路中电压、电流和电阻三者之间的关系，即电压等于电流和电阻的乘积。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imccchoi.github.io/img/post-7.webp">
+<meta property="article:published_time" content="2024-02-15T10:33:27.000Z">
+<meta property="article:modified_time" content="2024-02-29T13:39:53.538Z">
+<meta property="article:author" content="ccchoi">
+<meta property="article:tag" content="硬件基础">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imccchoi.github.io/img/post-7.webp">
+  
+  
+  
+  <title>嵌入式硬件基础与常用电子元器件原理 - ccchoi&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"imccchoi.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"7Q1xJx2ndhLnhYKsA9238DE8-gzGzoHsz","app_key":"nJQ4gTqt8ER4RXQCeeP76SCB","server_url":"https://7q1xjx2n.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ccchoi&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/venti-views-cHRDevKFDBw-unsplash.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="嵌入式硬件基础与常用电子元器件原理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-15 18:33" pubdate>
+          2024年2月15日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">嵌入式硬件基础与常用电子元器件原理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>模拟电子和数字电路是作为硬件知识的根基，本文将整理嵌入式开发需要了解的硬件基础知识和常用电子元器件的学习笔记，本篇笔记肯定不能完全涵盖模电与数电的全部内容，目标是对嵌入式开发有入门的硬件认知，有时间会计划深入完整学习更多，满足嵌入式软件开发所需要掌握硬件知识的要求即可。</p>
+</blockquote>
+<h2 id="1-电路基础"><a href="#1-电路基础" class="headerlink" title="1. 电路基础"></a>1. 电路基础</h2><h3 id="1-1-欧姆定律"><a href="#1-1-欧姆定律" class="headerlink" title="1.1 欧姆定律"></a>1.1 欧姆定律</h3><p>从最基础开始，欧姆定律揭示了电路中电压、电流和电阻三者之间的关系，即电压等于电流和电阻的乘积。当电阻恒定时，电压和电流成正比关系；当电压恒定时，电流和电阻成反比关系。</p>
+<ul>
+<li><strong>欧姆定律公式：U &#x3D; I × R</strong></li>
+</ul>
+<h4 id="1-1-1-串联分压"><a href="#1-1-1-串联分压" class="headerlink" title="1.1.1 串联分压"></a>1.1.1 串联分压</h4><p>假设电路有 R1 和 R2 两个电阻串联，根据欧姆定律，可以得出两个串联电阻的分压公式，如下图所示。这说明，各串联电阻的电压与其阻值成正比，阻值越大的电阻，分得的电压就越大。</p>
+<img src="/2024/02/15/post-7/post-7-1.png" srcset="/img/loading.gif" lazyload class="" width="300" height="80">
+
+<h4 id="1-1-2-并联分流"><a href="#1-1-2-并联分流" class="headerlink" title="1.1.2 并联分流"></a>1.1.2 并联分流</h4><p>类似两个电阻串联的分压公式，两个电阻并联分流公式如下图所示。从公式可以看出，各并联电阻的电流与其阻值成反相关，即该电阻越大，其电流就越小。另外可以发现，分流公式中，各支路电流公式的分子为另一支路电阻。</p>
+<img src="/2024/02/15/post-7/post-7-2.png" srcset="/img/loading.gif" lazyload class="" width="350" height="80">
+
+<h3 id="1-2-基尔霍夫定律"><a href="#1-2-基尔霍夫定律" class="headerlink" title="1.2 基尔霍夫定律"></a>1.2 基尔霍夫定律</h3><p>基尔霍夫定律是用来求解复杂电路的电学分析基本定律。从19世纪40年代，由于电气技术发展的十分迅速，电路变得愈来愈复杂。某些电路呈现出网络形状，并且网络中还存在一些由3条或3条以上支路形成的交点(节点)。这种复杂电路不是串、并联电路的公式所能解决的。</p>
+<ul>
+<li>基尔霍夫第一定律（KCL）：基尔霍夫第一定律又称基尔霍夫电流定律，简记为KCL，是电流的连续性在集总参数电路上的体现，其物理背景是电荷守恒公理。基尔霍夫电流定律是确定电路中任意节点处各支路电流之间关系的定律，因此又称为节点电流定律。<strong>基尔霍夫电流定律表明：所有进入某节点的电流的总和等于所有离开这节点的电流的总和。</strong></li>
+<li>基尔霍夫第二定律（KVL）：基尔霍夫第二定律又称基尔霍夫电压定律，简记为KVL，是电场为位场时电位的单值性在集总参数电路上的体现，其物理背景是能量守恒。基尔霍夫电压定律是确定电路中任意回路内各电压之间关系的定律，因此又称为回路电压定律。<strong>基尔霍夫电压定律表明：沿着闭合回路所有元件两端的电势差（电压）的代数和等于零。</strong></li>
+</ul>
+<h2 id="2-半导体"><a href="#2-半导体" class="headerlink" title="2. 半导体"></a>2. 半导体</h2><p>在深入了解模电数电和电子元器件之前，我们首先需要了解的是现代电路世界的基础 - 半导体， 半导体是一种介于导体（如金属）和绝缘体（如塑料）之间的电子材料。半导体的电导率介于导体和绝缘体之间，这使得它们在电子器件和集成电路中起到关键作用。半导体材料通常是硅（Si）和锗（Ge），利用半导体能制造出功能复杂的元器件和集成电路。现在公认的半导体理论基础也是 1949 年的 PN 结理论。</p>
+<h3 id="2-1-PN-结"><a href="#2-1-PN-结" class="headerlink" title="2.1 PN 结"></a>2.1 PN 结</h3><ul>
+<li><p>PN结形成： 通过将 N 型半导体和 P 型半导体直接结合，形成了 PN 结。在 PN 结的交界处，由于 P 型和 N 型半导体的电子互相扩散，形成了一个被称为空间电荷区或电势垒的区域。</p>
+</li>
+<li><p>电势垒： 在 PN 结的空间电荷区，电子从 N 型区向 P 型区移动，同时空穴从 P 型区向 N 型区移动。这造成了在空间电荷区中的电荷分离，形成电势垒。电势垒的形成导致了两侧的电荷分布不均，形成了一个电场。</p>
+</li>
+<li><p>禁带： 在 PN 结的空间电荷区，形成了一个禁带，阻止电子和空穴继续移动。为了使电子和空穴通过，它们必须克服这个禁带。</p>
+</li>
+<li><p>正向偏置： 当在P型半导体端连接正电压，而 N 型半导体端连接负电压时，这称为正向偏置。正向偏置会缩小电势垒，使电子和空穴能够克服禁带并流过 PN 结。在正向偏置下，呈导通状态。</p>
+</li>
+<li><p>反向偏置： 当在P型半导体端连接负电压，而N型半导体端连接正电压时，这称为反向偏置。反向偏置会增加电势垒，阻止电子和空穴通过PN结。在反向偏置下，呈截止状态。</p>
+</li>
+</ul>
+<blockquote>
+<p>✅ 推荐科普视频 - <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1774114798/">编程前你最好了解的基本硬件和计算机基础知识（模拟电路）by @Ele实验室</a></p>
+</blockquote>
+<h3 id="2-2-二极管"><a href="#2-2-二极管" class="headerlink" title="2.2 二极管"></a>2.2 二极管</h3><p>二极管是半导体器件家族里的“元老”，二极管就是是由一块 P 型半导体和一块 N 型半导体紧密地结合在一起而构成，在P型半导体和N型半导体的交界面上形成一个特殊的分界面，即上述提到的 PN 结。因为 PN 结具有单向导电性，电流只能从 P 型半导体一端流向 N 型半导体一端，PN 结的结构如图所示：</p>
+<img src="/2024/02/15/post-7/post-7-3.png" srcset="/img/loading.gif" lazyload class="" width="300" height="100">
+<br/>
+<br/>
+
+<p>将 P 型和 N 型半导体上各加上一根引线引出并封装起来，就构成一个二极管。与P型半导体连接的引线为正极，与N型半导体连接的引线为负极。</p>
+<p>二极管的特点是单向导通性，在正向偏置下导通，而在反向偏置下截止。这使得二极管成为许多电子电路中的基本构建模块，例如整流器、放大器、开关和逻辑门等。常用的二极管种类有发光二极管、稳压二极管等。</p>
+<h3 id="2-2-晶体管"><a href="#2-2-晶体管" class="headerlink" title="2.2 晶体管"></a>2.2 晶体管</h3><p>晶体管同样是一种半导体器件，它也在电子学和电路设计中扮演着重要的角色。晶体管可以作为开关或放大器使用，其基本原理也是基于 PN 结的控制。</p>
+<ul>
+<li><p>晶体管有基极（b）、集电极（c）、发射极（e）三个电极，它是由两个 PN 结背对背地连接在一起构成类似于三明治的结构，其最基本的作用是放大，它可以将微弱的电信号变成一定强度的信号。</p>
+</li>
+<li><p>晶体管有一个重要的参数，即电流放大系数 “β”。当在晶体管的基极上施加一个微小的电流时，在集电极上可以得到一个比基极电流大 β 倍的电流，这个电流称为集电极电流。集电极电流随着基极电流的变化而变化，基极电流微小的变化都可以引起集电极电流很大的变化，这就是晶体管放大作用的原理。</p>
+</li>
+</ul>
+<img src="/2024/02/15/post-7/post-7-4.png" srcset="/img/loading.gif" lazyload class="">
+
+<h4 id="2-3-场效应晶体管"><a href="#2-3-场效应晶体管" class="headerlink" title="2.3 场效应晶体管"></a>2.3 场效应晶体管</h4><p>晶体管是依靠输入电流变化来控制输出电流的器件，但理想的放大器是不应该损耗信号源的输出电流的，所以在一个由晶体管构成的放大电路中，因为有基极电流的存在，不可避免地会对输入信号带来损耗。与晶体管不同的是，场效应晶体管（FET）是一种用电压来控制电流的器件，具有很高的输入阻抗，且温度稳定性好、噪声低。</p>
+<h3 id="2-4-集成电路"><a href="#2-4-集成电路" class="headerlink" title="2.4 集成电路"></a>2.4 集成电路</h3><p>集成电路（Integrated Circuit, IC）是采用特定的工艺，将一个电路中所需的晶体管、二极管、电阻、电容和电感等元器件以及布线相互预先连接在一起，制作在一小块半导体晶片上，然后封装在一个管壳内，成为一种具有特定电路功能的电子元器件。</p>
+<p>两种数字集成电路：</p>
+<ul>
+<li><p>传统晶体管构成的数字集成电路（Transistor-Transistor Logic, TTL）</p>
+</li>
+<li><p>基于新型场效应晶体管构成的集成电路，即互补金属氧化物半导体数字集成电路（Complementary Metal Oxide Semiconductor, CMOS）</p>
+</li>
+</ul>
+<h3 id="2-5-模拟和数字"><a href="#2-5-模拟和数字" class="headerlink" title="2.5 模拟和数字"></a>2.5 模拟和数字</h3><p>模拟信号是一种连续的信号，通常采用传感器将模拟信号转换为电流、电压或电阻等电学量，这些量称为模拟量。<br>数字信号是一种非连续信号，通常使用高低电平来表示二进制数 1 和 0。</p>
+<h4 id="2-5-1-模拟电路"><a href="#2-5-1-模拟电路" class="headerlink" title="2.5.1 模拟电路"></a>2.5.1 模拟电路</h4><p>模拟电子电路也被称为线性电路，电路中一般具有输入和输出端，当输入信号的强度变大时，输出信号的强度也会随之变大，这就形成了所谓的线性放大过程。</p>
+<h4 id="2-5-2-数字电路"><a href="#2-5-2-数字电路" class="headerlink" title="2.5.2 数字电路"></a>2.5.2 数字电路</h4><p>数字电路就是用数字信号完成对数字量的算术运算和逻辑运算的电路，其构成的基本单元是逻辑门。数字电路以二值数字逻辑为基础，其工作信号是离散的数字信号。任何复杂的逻辑电路都可以由若干个逻辑门组成。</p>
+<p>7个基本逻辑门：</p>
+<ul>
+<li>或门</li>
+<li>与门</li>
+<li>非门</li>
+<li>与非门</li>
+<li>或非门</li>
+<li>异或门</li>
+<li>同或门</li>
+</ul>
+<p><strong>以上就是最基本的一些硬件知识。此外，模拟电路中的滤波、放大各种电路，数字电路中的组合逻辑、时序逻辑等等还有很多没有介绍到，电路世界也是一个充满探索的领域。</strong></p>
+<h2 id="3-常见电子元器件"><a href="#3-常见电子元器件" class="headerlink" title="3. 常见电子元器件"></a>3. 常见电子元器件</h2><h3 id="3-1-电阻"><a href="#3-1-电阻" class="headerlink" title="3.1 电阻"></a>3.1 电阻</h3><h4 id="3-1-1-常见电阻类型"><a href="#3-1-1-常见电阻类型" class="headerlink" title="3.1.1 常见电阻类型"></a>3.1.1 常见电阻类型</h4><ul>
+<li>直插电阻：这种电阻又称色环电阻。</li>
+<li>贴片电阻：基于表面贴装技术（SMD）制造的电阻。</li>
+</ul>
+<h4 id="3-1-2-阻值表示方法：色标法和文字符号法"><a href="#3-1-2-阻值表示方法：色标法和文字符号法" class="headerlink" title="3.1.2 阻值表示方法：色标法和文字符号法"></a>3.1.2 阻值表示方法：色标法和文字符号法</h4><ul>
+<li><p>色标法：直插电阻表面的色环就是色标法表示阻值的代表，通常有对照表可以参考计算对应电阻。</p>
+</li>
+<li><p>文字符号法：广泛用于贴片电阻，通常精度为 ±5% 的电阻使用三位数字表示阻值，其中前两位数字表示电阻值的有效数字，第三位数字表示电阻值的倍率。</p>
+<blockquote>
+<p>例如“223”，表示电阻的阻值为 22 × 103 &#x3D; 22kΩ。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="3-1-3-线性电阻和非线性电阻"><a href="#3-1-3-线性电阻和非线性电阻" class="headerlink" title="3.1.3 线性电阻和非线性电阻"></a>3.1.3 线性电阻和非线性电阻</h4><p>根据欧姆定律，电阻在伏安特性曲线中呈线性状态。但也有随温度和电压而变化的非线性电阻：热敏电阻、压敏电阻。</p>
+<h4 id="3-1-4-基本参数"><a href="#3-1-4-基本参数" class="headerlink" title="3.1.4 基本参数"></a>3.1.4 基本参数</h4><ul>
+<li>标称阻值</li>
+<li>额定功率</li>
+<li>允许误差：±0.5%(D) ±1%(F) ±2%(G) ±5%(J) ±10%(K) ±20%(M)</li>
+</ul>
+<h4 id="3-1-5-功能"><a href="#3-1-5-功能" class="headerlink" title="3.1.5 功能"></a>3.1.5 功能</h4><ul>
+<li>分压、限流、测温、防浪涌</li>
+</ul>
+<h3 id="2-2-电位器"><a href="#2-2-电位器" class="headerlink" title="2.2 电位器"></a>2.2 电位器</h3><p>有这样一类电阻，它的阻值是可变的，我们称其为“可变电阻器”或“电位器”，其外观如图1-5所示。电位器通常有两个固定端和一个滑动端，当调节电位器时，滑动端与两个固定端之间的电阻大小会随之改变，进而改变电路中电流或电压强度，实现某些控制功能，如控制音量、调节光照强度等。</p>
+<h3 id="2-3-电容"><a href="#2-3-电容" class="headerlink" title="2.3 电容"></a>2.3 电容</h3><p>电容可以存储电荷，但电路中电容器的作用并不是用于存储电能，而是利用电容器能反复充放电的特点，达到阻直流、通交流的目的。电容在电路图中的表示符号有两种，一种是无极性的电容，一种是有极性的电解电容。无极性的电容用两个平行且粗细相同的线来表示，而有极性的电容则是在无极性电容符号的基础上，在电容的正极标注正号。</p>
+<p>电容的单位是法拉，简称“法”，符号是“F”。法拉是一个比较大的单位，在实际使用时往往达不到这样的取值范围，因此常用的电容单位都比较小，如毫法（mF）、微法（μF）、纳法（nF）、皮法（pF）等。</p>
+<h3 id="2-4-电感"><a href="#2-4-电感" class="headerlink" title="2.4 电感"></a>2.4 电感</h3><ul>
+<li>当导线中有电流流过时，会在导线的周围产生磁场，为了让通电的导线产生更强的磁场，我们可以将导线缠绕起来制成螺线管，这样会使导线周围的磁场相互叠加。</li>
+<li>当线圈中的电流发生变化时，其周围的磁场也会发生相应的变化，此变化的磁场还可使线圈自身产生感应电动势，这种现象称为“自感”；</li>
+<li>如果在一个通电的线圈周围放置另外一个线圈，当通电的线圈中电流发生变化时，它周围的磁场变化会影响另一个线圈，并在另一个线圈的两端产生电压，如果这个线圈是闭合的，将有电流流过这个线圈，这种两个电感线圈靠近时相互影响的现象称为“互感”。</li>
+<li>电感量的单位是亨利，简称“亨”，用字母“H”表示。亨利同样也是一个较大的单位，常用的单位有毫亨（mH）和微亨（μH）等。</li>
+</ul>
+<h3 id="2-5-继电器"><a href="#2-5-继电器" class="headerlink" title="2.5 继电器"></a>2.5 继电器</h3><ul>
+<li>继电器也是基于电磁感应的原理制成的，是一种用小电流控制大电流的电子器件。</li>
+</ul>
+<h3 id="2-6-蜂鸣器"><a href="#2-6-蜂鸣器" class="headerlink" title="2.6 蜂鸣器"></a>2.6 蜂鸣器</h3><ul>
+<li>蜂鸣器是一种会发出声音的电子器件，蜂鸣器的原理与继电器类似，通电的电磁铁吸引振膜振荡产生音频信号，从而发出声音。常用的蜂鸣器分为两种：一种是有源蜂鸣器，它内部设有振荡电路，在它的两个引脚上接上电压就会发出固定频率的声音；另一种是无源蜂鸣器，内部无振荡电路，接上电源后不会发声，使用时需要用不同频率的方波信号来驱动它发声。</li>
+</ul>
+<h3 id="2-7-晶振"><a href="#2-7-晶振" class="headerlink" title="2.7 晶振"></a>2.7 晶振</h3><ul>
+<li><p>晶振是一种用于产生稳定频率的电子元件，通常用于时钟电路、计时器、微控制器等应用中。它的全名是晶体振荡器，主要由晶体和与之配套的振荡电路组成。</p>
+</li>
+<li><p>晶振的工作原理基于晶体的压电效应。晶体振荡器的基本构成包括一个晶体和与之连接的振荡电路。当一个电场被施加到晶体上时，晶体会发生微小的形变，这种形变称为压电效应。反过来，晶体的微小形变会导致电场的产生。通过反馈电路，晶体振荡器能够在特定频率下产生稳定的振荡。</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="print-no-link">#硬件基础</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>嵌入式硬件基础与常用电子元器件原理</div>
+      <div>https://imccchoi.github.io/2024/02/15/post-7/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ccchoi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/29/post-8/" title="STM32 HAL库开发学习笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32 HAL库开发学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/13/post-6/" title="嵌入式 Linux 开发环境初步搭建">
+                        <span class="hidden-mobile">嵌入式 Linux 开发环境初步搭建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"7Q1xJx2ndhLnhYKsA9238DE8-gzGzoHsz","appKey":"nJQ4gTqt8ER4RXQCeeP76SCB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
